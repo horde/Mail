@@ -28,7 +28,7 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Mail">
-      <file name="UPGRADING" role="doc" />
+      <file name="UPGRADING.rst" role="doc" />
      </dir> <!-- /doc/Horde/Mail -->
     </dir> <!-- /doc/Horde -->
    </dir> <!-- /doc -->
@@ -188,7 +188,7 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="UPGRADING" name="doc/Horde/Mail/UPGRADING" />
+   <install as="UPGRADING.rst" name="doc/Horde/Mail/UPGRADING.rst" />
    <install as="Horde/Mail/Exception.php" name="lib/Horde/Mail/Exception.php" />
    <install as="Horde/Mail/Mbox/Parse.php" name="lib/Horde/Mail/Mbox/Parse.php" />
    <install as="Horde/Mail/Rfc822.php" name="lib/Horde/Mail/Rfc822.php" />
