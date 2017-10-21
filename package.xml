@@ -10,7 +10,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-20</date>
+ <date>2017-10-21</date>
  <version>
   <release>2.6.5</release>
   <api>2.6.0</api>
@@ -28,7 +28,8 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Mail">
-      <file name="UPGRADING.rst" role="doc" />
+      <file name="COPYING" role="doc" />
+      <file name="UPGRADING" role="doc" />
      </dir> <!-- /doc/Horde/Mail -->
     </dir> <!-- /doc/Horde -->
    </dir> <!-- /doc -->
@@ -92,11 +93,11 @@
       <file name="MboxParseTest.php" role="test" />
       <file name="ObjectTest.php" role="test" />
       <file name="ParseTest.php" role="test" />
+      <file name="phpunit.xml" role="test" />
       <file name="SendTest.php" role="test" />
      </dir> <!-- /test/Horde/Mail -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
-   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -187,7 +188,8 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="UPGRADING.rst" name="doc/Horde/Mail/UPGRADING.rst" />
+   <install as="COPYING" name="doc/Horde/Mail/COPYING" />
+   <install as="UPGRADING" name="doc/Horde/Mail/UPGRADING" />
    <install as="Horde/Mail/Exception.php" name="lib/Horde/Mail/Exception.php" />
    <install as="Horde/Mail/Mbox/Parse.php" name="lib/Horde/Mail/Mbox/Parse.php" />
    <install as="Horde/Mail/Rfc822.php" name="lib/Horde/Mail/Rfc822.php" />
@@ -207,7 +209,6 @@
    <install as="Horde/Mail/Transport/Smtp.php" name="lib/Horde/Mail/Transport/Smtp.php" />
    <install as="Horde/Mail/Transport/Smtphorde.php" name="lib/Horde/Mail/Transport/Smtphorde.php" />
    <install as="Horde/Mail/Transport/Smtpmx.php" name="lib/Horde/Mail/Transport/Smtpmx.php" />
-   <install as="LICENSE" name="LICENSE" />
    <install as="locale/Horde_Mail.pot" name="locale/Horde_Mail.pot" />
    <install as="locale/tr/LC_MESSAGES/Horde_Mail.mo" name="locale/tr/LC_MESSAGES/Horde_Mail.mo" />
    <install as="locale/tr/LC_MESSAGES/Horde_Mail.po" name="locale/tr/LC_MESSAGES/Horde_Mail.po" />
@@ -224,6 +225,7 @@
    <install as="Horde/Mail/MboxParseTest.php" name="test/Horde/Mail/MboxParseTest.php" />
    <install as="Horde/Mail/ObjectTest.php" name="test/Horde/Mail/ObjectTest.php" />
    <install as="Horde/Mail/ParseTest.php" name="test/Horde/Mail/ParseTest.php" />
+   <install as="Horde/Mail/phpunit.xml" name="test/Horde/Mail/phpunit.xml" />
    <install as="Horde/Mail/SendTest.php" name="test/Horde/Mail/SendTest.php" />
   </filelist>
  </phprelease>
@@ -765,7 +767,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-20</date>
+   <date>2017-10-21</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
 * 
