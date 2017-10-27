@@ -10,7 +10,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-21</date>
+ <date>2017-10-27</date>
  <version>
   <release>2.6.5</release>
   <api>2.6.0</api>
@@ -27,6 +27,7 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Mail">
+      <file name="CHANGES" role="doc" />
       <file name="UPGRADING.rst" role="doc" />
      </dir> <!-- /doc/Horde/Mail -->
     </dir> <!-- /doc/Horde -->
@@ -186,6 +187,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Mail/CHANGES" />
    <install as="UPGRADING.rst" name="doc/Horde/Mail/UPGRADING.rst" />
    <install as="Horde/Mail/Exception.php" name="lib/Horde/Mail/Exception.php" />
    <install as="Horde/Mail/Mbox/Parse.php" name="lib/Horde/Mail/Mbox/Parse.php" />
@@ -762,7 +764,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-21</date>
+   <date>2017-10-27</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
    </notes>
