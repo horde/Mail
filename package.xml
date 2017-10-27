@@ -21,7 +21,6 @@
  </stability>
  <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
  <notes>
-* 
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -390,7 +389,6 @@
    <date>2012-04-10</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
-*
    </notes>
   </release>
   <release>
@@ -606,7 +604,6 @@
    <date>2014-02-11</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
-* 
    </notes>
   </release>
   <release>
@@ -768,7 +765,6 @@
    <date>2017-10-21</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
-* 
    </notes>
   </release>
  </changelog>
