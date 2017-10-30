@@ -10,7 +10,7 @@
   <email>slusarz@horde.org</email>
   <active>yes</active>
  </lead>
- <date>2017-10-21</date>
+ <date>2017-10-30</date>
  <version>
   <release>2.6.5</release>
   <api>2.6.0</api>
@@ -28,6 +28,7 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Mail">
+      <file name="CHANGES" role="doc" />
       <file name="COPYING" role="doc" />
       <file name="UPGRADING" role="doc" />
      </dir> <!-- /doc/Horde/Mail -->
@@ -188,6 +189,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Mail/CHANGES" />
    <install as="COPYING" name="doc/Horde/Mail/COPYING" />
    <install as="UPGRADING" name="doc/Horde/Mail/UPGRADING" />
    <install as="Horde/Mail/Exception.php" name="lib/Horde/Mail/Exception.php" />
@@ -767,7 +769,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-10-21</date>
+   <date>2017-10-30</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
 * 
