@@ -4,11 +4,13 @@
   state:
     release: stable
     api: stable
-  date: 2017-10-21
+  date: 2019-03-02
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes:
+  notes: |+
+    [mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.
+    
 2.6.4:
   api: 2.6.0
   state:
