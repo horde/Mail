@@ -1,6 +1,10 @@
-----------
-v2.6.5-git
-----------
+------------
+v3.0.0alpha1
+------------
+
+[mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch
+      blocks.
+
 
 
 ------

@@ -2,7 +2,9 @@
 id: Mail
 name: Mail
 full: Mail library
-description: A library that provides interfaces for sending e-mail messages and parsing e-mail addresses.
+description: >-
+  A library that provides interfaces for sending e-mail messages and parsing
+  e-mail addresses.
 list: dev
 type: library
 homepage: https://www.horde.org/libraries/Horde_Mail
@@ -14,11 +16,11 @@ authors:
     active: false
     role: lead
 version:
-  release: 2.6.5
-  api: 2.6.0
+  release: 3.0.0alpha1
+  api: 3.0.0alpha1
 state:
-  release: stable
-  api: stable
+  release: alpha
+  api: alpha
 license:
   identifier: BSD-2-Clause
   uri: http://www.horde.org/licenses/bsd
