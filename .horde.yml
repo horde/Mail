@@ -26,18 +26,18 @@ license:
   uri: http://www.horde.org/licenses/bsd
 dependencies:
   required:
-    php: ^5.3 || ^7
-    pear:
-      pear.horde.org/Horde_Exception: ^2
-      pear.horde.org/Horde_Idna: ^1
-      pear.horde.org/Horde_Mime: ^2
-      pear.horde.org/Horde_Stream_Filter: ^2
-      pear.horde.org/Horde_Translation: ^2.2
-      pear.horde.org/Horde_Util: ^2
+    php: ^7
+    composer:
+      horde/exception: ^3
+      horde/idna: ^2
+      horde/mime: ^3
+      horde/stream_filter: ^3
+      horde/translation: ^3
+      horde/util: ^3
   optional:
-    pear:
-      pear.horde.org/Horde_Smtp: ^1.7
-      pear.horde.org/Horde_Stream_Wrapper: ^2.1
-      pear.horde.org/Horde_Test: ^2.1
-      pear.php.net/Net_DNS2: '*'
-      pear.php.net/Net_SMTP: ^1.6
+    composer:
+      horde/smtp: ^2
+      horde/stream_wrapper: ^3
+      horde/test: ^3
+      pear/net_dns2: ^1.5
+      pear/net_smtp: ^1.9
