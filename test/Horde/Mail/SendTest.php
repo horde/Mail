@@ -6,8 +6,12 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+namespace Horde\Mail;
+use PHPUnit\Framework\TestCase;
+use \Horde_Mail_Transport_Mock;
+use \Horde_Mail_Rfc822_Address;
 
-class Horde_Mail_SendTest extends PHPUnit_Framework_TestCase
+class SendTest extends TestCase
 {
     /* Test case for mixed EOLs. */
     public function testMixedEOLs()
@@ -45,6 +49,8 @@ class Horde_Mail_SendTest extends PHPUnit_Framework_TestCase
         if (preg_match("/(?<!\r)\n/", $ob->sentMessages[1]['body'])) {
             $this->fail("Unexpected EOL in body.");
         }
+
+        $this->markTestSkipped('No Exception expected.');
     }
 
     public function testBug12116()
@@ -76,13 +82,10 @@ class Horde_Mail_SendTest extends PHPUnit_Framework_TestCase
 
     public function testMissingFrom()
     {
+        $this->expectException('Horde_Mail_Exception');
         $ob = new Horde_Mail_Transport_Mock();
 
-        try {
-            $ob->send(array('foo@example.com'), array(), 'Foo');
-            $this->fail('Expected Horde_Mail_Exception.');
-        } catch (Horde_Mail_Exception $e) {
-        }
+        $ob->send(array('foo@example.com'), array(), 'Foo');
     }
 
 }

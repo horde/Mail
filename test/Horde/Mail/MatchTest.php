@@ -6,8 +6,11 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+namespace Horde\Mail;
+use PHPUnit\Framework\TestCase;
+use \Horde_Mail_Rfc822_Address;
 
-class Horde_Mail_MatchTest extends PHPUnit_Framework_TestCase
+class MatchTest extends TestCase
 {
     /**
      * @dataProvider matchProvider

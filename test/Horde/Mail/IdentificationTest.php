@@ -11,6 +11,9 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+namespace Horde\Mail;
+use PHPUnit\Framework\TestCase;
+use \Horde_Mail_Rfc822_Identification;
 
 /**
  * Test identification fields parsing code.
@@ -23,7 +26,7 @@
  * @package    Mail
  * @subpackage UnitTests
  */
-class Horde_Mail_IdentificationTest extends PHPUnit_Framework_TestCase
+class IdentificationTest extends TestCase
 {
     /**
      * @dataProvider provider

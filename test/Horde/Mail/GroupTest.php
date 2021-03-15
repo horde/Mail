@@ -6,8 +6,11 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+namespace Horde\Mail;
+use PHPUnit\Framework\TestCase;
+use \Horde_Mail_Rfc822_Group;
 
-class Horde_Mail_GroupTest extends PHPUnit_Framework_TestCase
+class GroupTest extends TestCase
 {
     /**
      * @dataProvider writeAddressProvider

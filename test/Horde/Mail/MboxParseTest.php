@@ -11,6 +11,9 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+namespace Horde\Mail;
+use PHPUnit\Framework\TestCase;
+use \Horde_Mail_Mbox_Parse;
 
 /**
  * Test the mbox parsing objecct.
@@ -23,7 +26,7 @@
  * @package    Mail
  * @subpackage UnitTests
  */
-class Horde_Mail_MboxParseTest extends PHPUnit_Framework_TestCase
+class MboxParseTest extends TestCase
 {
     public function testMboxParse()
     {
@@ -41,8 +44,7 @@ class Horde_Mail_MboxParseTest extends PHPUnit_Framework_TestCase
                 $key
             );
 
-            $this->assertInternalType(
-                'array',
+            $this->assertIsArray(
                 $val
             );
 
@@ -67,8 +69,7 @@ class Horde_Mail_MboxParseTest extends PHPUnit_Framework_TestCase
 
         $val = $parse[0];
 
-        $this->assertInternalType(
-            'array',
+        $this->assertIsArray(
             $val
         );
 
@@ -97,6 +98,7 @@ class Horde_Mail_MboxParseTest extends PHPUnit_Framework_TestCase
      */
     public function testBadData()
     {
+        $this->expectException('Horde_Mail_Exception');
         new Horde_Mail_Mbox_Parse(__DIR__ . '/noexist');
     }
 
