@@ -20,7 +20,7 @@
         }
     ],
     "require": {
-        "php": "^7",
+        "php": "^7.4 || ^8",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
         "horde/idna": "^2 || dev-FRAMEWORK_6_0",
         "horde/mime": "^3 || dev-FRAMEWORK_6_0",
