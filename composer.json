@@ -15,7 +15,7 @@
         "php": "^7.4 || ^8.0",
         "bytestream/horde-exception": "^2",
         "bytestream/horde-idna": "^1",
-        "bytestream/horde-mime": "^2",
+        "bytestream/horde-mime": "^2.12",
         "bytestream/horde-stream-filter": "^2",
         "bytestream/horde-translation": "^2.2",
         "bytestream/horde-util": "^2"
