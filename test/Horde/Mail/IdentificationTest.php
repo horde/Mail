@@ -23,7 +23,7 @@
  * @package    Mail
  * @subpackage UnitTests
  */
-class Horde_Mail_IdentificationTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_IdentificationTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider provider

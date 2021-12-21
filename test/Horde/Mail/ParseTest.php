@@ -7,7 +7,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Mail_ParseTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_ParseTest extends \PHPUnit\Framework\TestCase
 {
     private $rfc822;
 

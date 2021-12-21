@@ -1,6 +1,6 @@
-<phpunit bootstrap="test/Horde/Mail/bootstrap.php" colors="true">
+<phpunit colors="true">
   <testsuites>
-    <testsuite>
+    <testsuite name="all">
       <directory>test</directory>
     </testsuite>
   </testsuites>

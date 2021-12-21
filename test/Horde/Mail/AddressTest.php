@@ -7,7 +7,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Mail_AddressTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_AddressTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider domainMatchProvider

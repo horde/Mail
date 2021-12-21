@@ -23,7 +23,7 @@
  * @package    Mail
  * @subpackage UnitTests
  */
-class Horde_Mail_MboxParseTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_MboxParseTest extends \PHPUnit\Framework\TestCase
 {
     public function testMboxParse()
     {
