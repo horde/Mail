@@ -41,8 +41,7 @@ class Horde_Mail_MboxParseTest extends \PHPUnit\Framework\TestCase
                 $key
             );
 
-            $this->assertInternalType(
-                'array',
+            $this->assertIsArray(
                 $val
             );
 
@@ -67,8 +66,7 @@ class Horde_Mail_MboxParseTest extends \PHPUnit\Framework\TestCase
 
         $val = $parse[0];
 
-        $this->assertInternalType(
-            'array',
+        $this->assertIsArray(
             $val
         );
 
@@ -92,11 +90,9 @@ class Horde_Mail_MboxParseTest extends \PHPUnit\Framework\TestCase
         );
     }
 
-    /**
-     * @expectedException Horde_Mail_Exception
-     */
     public function testBadData()
     {
+        $this->expectException(Horde_Mail_Exception::class);
         new Horde_Mail_Mbox_Parse(__DIR__ . '/noexist');
     }
 

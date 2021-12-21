@@ -11,8 +11,9 @@ class Horde_Mail_ParseTest extends \PHPUnit\Framework\TestCase
 {
     private $rfc822;
 
-    public function setUp()
+    public function setUp(): void
     {
+        parent::setUp();
         $this->rfc822 = new Horde_Mail_Rfc822();
     }
 
@@ -42,8 +43,7 @@ class Horde_Mail_ParseTest extends \PHPUnit\Framework\TestCase
             'mydomain.com',
             $ob->host
         );
-        $this->assertInternalType(
-            'array',
+        $this->assertIsArray(
             $ob->comment
         );
         $this->assertEquals(
@@ -123,7 +123,7 @@ class Horde_Mail_ParseTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($result instanceof Horde_Mail_Rfc822_List);
         $this->assertTrue($result[0] instanceof Horde_Mail_Rfc822_Address);
         $this->assertEquals($result[0]->personal, '');
-        $this->assertInternalType('array', $result[0]->comment);
+        $this->assertIsArray($result[0]->comment);
         $this->assertEquals($result[0]->comment, array());
         $this->assertEquals($result[0]->mailbox, 'user');
         $this->assertEquals($result[0]->host, 'example.com');
@@ -140,23 +140,23 @@ class Horde_Mail_ParseTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($result[0]->addresses instanceof Horde_Mail_Rfc822_GroupList);
         $this->assertEquals(0, $result[0]->addresses->groupCount());
 
-        $this->assertInternalType('object', $result[0]->addresses[0]);
+        $this->assertIsObject($result[0]->addresses[0]);
         $this->assertEquals($result[0]->addresses[0]->personal, 'Richard');
-        $this->assertInternalType('array', $result[0]->addresses[0]->comment);
+        $this->assertIsArray($result[0]->addresses[0]->comment);
         $this->assertEquals($result[0]->addresses[0]->comment[0], 'A comment');
         $this->assertEquals($result[0]->addresses[0]->mailbox, 'richard');
         $this->assertEquals($result[0]->addresses[0]->host, 'example.com');
 
-        $this->assertInternalType('object', $result[0]->addresses[1]);
+        $this->assertIsObject($result[0]->addresses[1]);
         $this->assertEquals($result[0]->addresses[1]->personal, '');
-        $this->assertInternalType('array', $result[0]->addresses[1]->comment);
+        $this->assertIsArray($result[0]->addresses[1]->comment);
         $this->assertEquals($result[0]->addresses[1]->comment[0], 'Ted Bloggs');
         $this->assertEquals($result[0]->addresses[1]->mailbox, 'ted');
         $this->assertEquals($result[0]->addresses[1]->host, 'example.com');
 
-        $this->assertInternalType('object', $result[0]->addresses[2]);
+        $this->assertIsObject($result[0]->addresses[2]);
         $this->assertEquals($result[0]->addresses[2]->personal, '');
-        $this->assertInternalType('array', $result[0]->addresses[2]->comment);
+        $this->assertIsArray($result[0]->addresses[2]->comment);
         $this->assertEquals($result[0]->addresses[2]->comment, array());
         $this->assertEquals($result[0]->addresses[2]->mailbox, 'Barney');
         $this->assertEmpty($result[0]->addresses[2]->host);
@@ -170,7 +170,7 @@ class Horde_Mail_ParseTest extends \PHPUnit\Framework\TestCase
         $this->assertTrue($result instanceof Horde_Mail_Rfc822_List);
         $this->assertTrue($result[0] instanceof Horde_Mail_Rfc822_Address);
         $this->assertEquals($result[0]->personal, '');
-        $this->assertInternalType('array', $result[0]->comment);
+        $this->assertIsArray($result[0]->comment);
         $this->assertEquals($result[0]->comment, array());
         $this->assertEquals($result[0]->mailbox, 'Jon Parise');
         $this->assertEquals($result[0]->host, 'php.net');

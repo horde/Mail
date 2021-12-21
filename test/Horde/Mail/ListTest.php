@@ -11,8 +11,9 @@ class Horde_Mail_ListTest extends \PHPUnit\Framework\TestCase
 {
     private $rfc822;
 
-    public function setUp()
+    public function setUp(): void
     {
+        parent::setUp();
         $this->rfc822 = new Horde_Mail_Rfc822();
     }
 
@@ -437,14 +438,14 @@ class Horde_Mail_ListTest extends \PHPUnit\Framework\TestCase
             4,
             count($ob)
         );
-        $this->assertInternalType('string', $ob[0]);
+        $this->assertIsString($ob[0]);
 
         $ob = $res->bare_addresses;
         $this->assertEquals(
             4,
             count($ob)
         );
-        $this->assertInternalType('string', $ob[0]);
+        $this->assertIsString($ob[0]);
 
         $ob = $res->base_addresses;
         $this->assertEquals(
