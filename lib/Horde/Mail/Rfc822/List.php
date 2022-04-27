@@ -515,4 +515,14 @@ class Horde_Mail_Rfc822_List
         $this->_data = unserialize($data);
     }
 
+	public function __serialize() {
+		return array(
+			'data' => $this->serialize()
+		);
+	}
+
+	public function __unserialize(array $data) {
+		$this->_data = $data['data'];
+	}
+
 }
