@@ -517,7 +517,7 @@ class Horde_Mail_Rfc822_List
 
 	public function __serialize() {
 		return array(
-			'data' => $this->serialize()
+			'data' => $this->_data
 		);
 	}
 
