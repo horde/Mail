@@ -7,7 +7,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Mail_ObjectTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_ObjectTest extends \PHPUnit\Framework\TestCase
 {
     public function testWriteAddress()
     {
