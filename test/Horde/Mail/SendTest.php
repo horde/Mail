@@ -7,7 +7,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Mail_SendTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_SendTest extends \PHPUnit\Framework\TestCase
 {
     /* Test case for mixed EOLs. */
     public function testMixedEOLs()
