@@ -1,4 +1,15 @@
 ---
+2.6.7:
+  api: 2.6.0
+  state:
+    release: stable
+    api: stable
+  date: 2022-06-25
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |+
+    
 2.6.6:
   api: 2.6.0
   state:
