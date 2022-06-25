@@ -4,7 +4,7 @@
   state:
     release: stable
     api: stable
-  date: 2019-03-02
+  date: 2022-06-25
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd

@@ -3,14 +3,14 @@
  <name>Horde_Mail</name>
  <channel>pear.horde.org</channel>
  <summary>Mail library</summary>
- <description>Provides interfaces for sending e-mail messages and parsing e-mail addresses.</description>
+ <description>A library that provides interfaces for sending e-mail messages and parsing e-mail addresses.</description>
  <lead>
   <name>Michael Slusarz</name>
   <user>slusarz</user>
   <email>slusarz@horde.org</email>
   <active>no</active>
  </lead>
- <date>2019-03-02</date>
+ <date>2022-06-25</date>
  <version>
   <release>2.6.6</release>
   <api>2.6.0</api>
@@ -21,7 +21,8 @@
  </stability>
  <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
  <notes>
-* 
+* [mjr] Null string fixes for PHP 8.1 (PR #2, Christoph Wurst &lt;christoph@winzerhof-wurst.at&gt;)
+* |+
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -852,7 +853,8 @@
    <date>2019-03-02</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
-* 
+* [mjr] Null string fixes for PHP 8.1 (PR #2, Christoph Wurst &lt;christoph@winzerhof-wurst.at&gt;)
+* |+
    </notes>
   </release>
  </changelog>
