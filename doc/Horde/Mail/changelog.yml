@@ -8,8 +8,9 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-    
+  notes: |
+    [mjr] Null string fixes for PHP 8.1 (PR #2, Christoph Wurst <christoph@winzerhof-wurst.at>)
+    |+
 2.6.5:
   api: 2.6.0
   state:
@@ -158,7 +159,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes:
+  notes: ~
 2.1.4:
   api: 2.1.0
   state:
@@ -338,7 +339,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes:
+  notes: ~
 1.2.0:
   api: 1.2.0
   state:
