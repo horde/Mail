@@ -74,6 +74,7 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+    #[\ReturnTypeWillChange]
     public function __get($name)
     {
         switch ($name) {
@@ -331,6 +332,7 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+    #[\ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return !is_null($this[$offset]);
@@ -338,6 +340,7 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         try {
@@ -350,6 +353,7 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+    #[\ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         if ($ob = $this[$offset]) {
@@ -367,6 +371,7 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
+    #[\ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         if ($ob = $this[$offset]) {
@@ -387,13 +392,13 @@ class Horde_Mail_Rfc822_List
      *
      * @return integer  The number of addresses.
      */
-    public function count()
+    public function count(): int
     {
         return count($this->addresses);
     }
 
     /* Iterator methods. */
-
+    #[\ReturnTypeWillChange]
     public function current()
     {
         if (!$this->valid()) {
@@ -406,12 +411,13 @@ class Horde_Mail_Rfc822_List
             ? $ob
             : $ob->addresses[$this->_ptr['subidx']];
     }
-
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->_ptr['key'];
     }
 
+    #[\ReturnTypeWillChange]
     public function next()
     {
         if (is_null($this->_ptr['subidx'])) {
@@ -437,6 +443,7 @@ class Horde_Mail_Rfc822_List
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function rewind()
     {
         $this->_ptr = array(
@@ -453,11 +460,13 @@ class Horde_Mail_Rfc822_List
         }
     }
 
+    #[\ReturnTypeWillChange]
     public function valid()
     {
         return (!empty($this->_ptr) && isset($this->_data[$this->_ptr['idx']]));
     }
 
+    #[\ReturnTypeWillChange]
     public function seek($position)
     {
         if (!$this->valid() ||
@@ -510,9 +519,18 @@ class Horde_Mail_Rfc822_List
         return serialize($this->_data);
     }
 
+    public function __serialize(): array
+    {
+        return $this->_data;
+    }
+
     public function unserialize($data)
     {
         $this->_data = unserialize($data);
+    }
+    public function __unserialize(array $data): void
+    {
+        $this->_data = $data;
     }
 
 }
