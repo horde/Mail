@@ -162,7 +162,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
     {
         $rfc822 = new Horde_Mail_Rfc822();
 
-        $address = $rfc822->encode($this->mailbox, 'address');
+        $address = $rfc822->encode((string)$this->mailbox, 'address');
         $host = empty($opts['idn']) ? $this->host : $this->host_idn;
         if (!empty($host)) {
             $address .= '@' . $host;
