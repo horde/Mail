@@ -2,7 +2,8 @@
 v3.0.0alpha4
 ------------
 
-
+[rla] Fix validation for identities without an email address
+|+
 
 
 ------------
@@ -20,6 +21,22 @@ v3.0.0alpha2
 ------------
 v3.0.0alpha1
 ------------
+
+[mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch
+      blocks.
+
+
+------
+v2.6.6
+------
+
+[mjr] Null string fixes for PHP 8.1 (PR #2, Christoph Wurst
+      <christoph@winzerhof-wurst.at>)
+
+
+------
+v2.6.5
+------
 
 [mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch
       blocks.

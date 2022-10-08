@@ -1,5 +1,4 @@
 {
-    "minimum-stability": "dev",
     "name": "horde/mail",
     "description": "Mail library",
     "type": "library",
@@ -12,11 +11,11 @@
             "role": "lead"
         }
     ],
-    "time": "2021-03-13",
+    "time": "2022-10-08",
     "repositories": [
         {
             "type": "composer",
-            "url": "https://horde-satis.maintaina.com/"
+            "url": "https://horde-satis.maintaina.com"
         }
     ],
     "require": {
@@ -28,6 +27,7 @@
         "horde/translation": "^3 || dev-FRAMEWORK_6_0",
         "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
+    "require-dev": {},
     "suggest": {
         "horde/smtp": "^2 || dev-FRAMEWORK_6_0",
         "horde/stream_wrapper": "^3 || dev-FRAMEWORK_6_0",
@@ -38,6 +38,16 @@
     "autoload": {
         "psr-0": {
             "Horde_Mail": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Horde\\Mail\\Test\\": "test/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "horde/horde-installer-plugin": true
         }
     }
 }

@@ -10,7 +10,7 @@
   <email>slusarz@horde.org</email>
   <active>no</active>
  </lead>
- <date>2021-03-13</date>
+ <date>2022-10-08</date>
  <version>
   <release>3.0.0alpha4</release>
   <api>3.0.0alpha1</api>
@@ -21,10 +21,18 @@
  </stability>
  <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
  <notes>
-* 
+* [rla] Fix validation for identities without an email address
+* |+
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
+   <dir name=".github">
+    <dir name="workflows">
+     <file name="ci.yml" role="php" />
+     <file name="phpdoc.yml" role="php" />
+     <file name="update-satis.yml" role="php" />
+    </dir> <!-- /.github/workflows -->
+   </dir> <!-- /.github -->
    <dir name="doc">
     <dir name="Horde">
      <dir name="Mail">
@@ -103,9 +111,9 @@
  <dependencies>
   <required>
    <php>
-    <min>7.0.0</min>
-    <max>8.0.0alpha1</max>
-    <exclude>8.0.0alpha1</exclude>
+    <min>7.4.0</min>
+    <max>9.0.0alpha1</max>
+    <exclude>9.0.0alpha1</exclude>
    </php>
    <pearinstaller>
     <min>1.7.0</min>
@@ -114,6 +122,9 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="workflows/ci.yml" name=".github/workflows/ci.yml" />
+   <install as="workflows/phpdoc.yml" name=".github/workflows/phpdoc.yml" />
+   <install as="workflows/update-satis.yml" name=".github/workflows/update-satis.yml" />
    <install as="CHANGES" name="doc/Horde/Mail/CHANGES" />
    <install as="UPGRADING.rst" name="doc/Horde/Mail/UPGRADING.rst" />
    <install as="Horde/Mail/Exception.php" name="lib/Horde/Mail/Exception.php" />
@@ -156,47 +167,6 @@
   </filelist>
  </phprelease>
  <changelog>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
   <release>
    <version>
     <release>1.0.0alpha1</release>
@@ -792,6 +762,36 @@
   </release>
   <release>
    <version>
+    <release>2.6.5</release>
+    <api>2.6.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2019-03-02</date>
+   <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
+   <notes>
+* [mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>2.6.6</release>
+    <api>2.6.0</api>
+   </version>
+   <stability>
+    <release>stable</release>
+    <api>stable</api>
+   </stability>
+   <date>2019-03-02</date>
+   <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
+   <notes>
+* [mjr] Null string fixes for PHP 8.1 (PR #2, Christoph Wurst &lt;christoph@winzerhof-wurst.at&gt;)
+   </notes>
+  </release>
+  <release>
+   <version>
     <release>3.0.0alpha1</release>
     <api>3.0.0alpha1</api>
    </version>
@@ -847,7 +847,8 @@
    <date>2021-03-13</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
-* 
+* [rla] Fix validation for identities without an email address
+* |+
    </notes>
   </release>
  </changelog>
