@@ -7,6 +7,7 @@
  * @subpackage UnitTests
  */
 namespace Horde\Mail;
+use \Horde_Mime_Headers_Addresses;
 use PHPUnit\Framework\TestCase;
 use \Horde_Mail_Rfc822_Identification;
 use \Horde_Mail_Rfc822;
@@ -527,6 +528,23 @@ class ListTest extends TestCase
         $this->assertEquals(
             'foo',
             $ob[0]->mailbox
+        );
+    }
+
+    public function testAdd()
+    {
+        $list = new Horde_Mail_Rfc822_List();
+
+        $headerAddressList = new Horde_Mime_Headers_Addresses(
+            "Bcc",
+            "firstname lastname <firstname.lastname@horde.org>"
+        );
+
+        $list->add($headerAddressList);
+
+        $this->assertSame(
+            $headerAddressList->getAddressList()[0]->__toString(),
+            $list[0]->__toString()
         );
     }
 

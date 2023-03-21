@@ -11,6 +11,8 @@
  * @package   Mail
  */
 
+use \Horde_Mime_Headers_Addresses;
+
 /**
  * Container object for a collection of RFC 822 elements.
  *
@@ -303,6 +305,10 @@ class Horde_Mail_Rfc822_List
     protected function _normalize($obs)
     {
         $add = array();
+
+        if ($obs instanceof Horde_Mime_Headers_Addresses) {
+            $obs = $obs->getAddressList();
+        }
 
         if (!($obs instanceof Horde_Mail_Rfc822_List) &&
             !is_array($obs)) {
