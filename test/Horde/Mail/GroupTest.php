@@ -7,7 +7,7 @@
  * @subpackage UnitTests
  */
 
-class Horde_Mail_GroupTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_GroupTest extends Horde_Test_Case
 {
     /**
      * @dataProvider writeAddressProvider

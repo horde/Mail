@@ -7,11 +7,11 @@
  * @subpackage UnitTests
  */
 
-class Horde_Mail_ListTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_ListTest extends Horde_Test_Case
 {
     private $rfc822;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->rfc822 = new Horde_Mail_Rfc822();
     }
@@ -437,14 +437,14 @@ class Horde_Mail_ListTest extends PHPUnit_Framework_TestCase
             4,
             count($ob)
         );
-        $this->assertInternalType('string', $ob[0]);
+        $this->assertIsString($ob[0]);
 
         $ob = $res->bare_addresses;
         $this->assertEquals(
             4,
             count($ob)
         );
-        $this->assertInternalType('string', $ob[0]);
+        $this->assertIsString($ob[0]);
 
         $ob = $res->base_addresses;
         $this->assertEquals(
@@ -465,6 +465,7 @@ class Horde_Mail_ListTest extends PHPUnit_Framework_TestCase
 
     public function testIterateEmptyArray()
     {
+        $this->expectNotToPerformAssertions();
         $ob = new Horde_Mail_Rfc822_List();
 
         foreach ($ob as $val) {
@@ -511,6 +512,7 @@ class Horde_Mail_ListTest extends PHPUnit_Framework_TestCase
 
     public function matchProvider()
     {
+        $this->expectNotToPerformAssertions();
         return array(
             array(array('foo@example.com'), false),
             array(array('bar@example.com'), false),

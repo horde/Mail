@@ -7,11 +7,12 @@
  * @subpackage UnitTests
  */
 
-class Horde_Mail_SendTest extends PHPUnit_Framework_TestCase
+class Horde_Mail_SendTest extends Horde_Test_Case
 {
     /* Test case for mixed EOLs. */
     public function testMixedEOLs()
     {
+        $this->expectNotToPerformAssertions();
         $ob = new Horde_Mail_Transport_Mock();
         $ob->sep = "\n";
 
@@ -76,6 +77,7 @@ class Horde_Mail_SendTest extends PHPUnit_Framework_TestCase
 
     public function testMissingFrom()
     {
+        $this->expectNotToPerformAssertions();
         $ob = new Horde_Mail_Transport_Mock();
 
         try {
