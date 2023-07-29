@@ -170,7 +170,7 @@ class Horde_Mail_Rfc822
             if ($val instanceof Horde_Mail_Rfc822_Object) {
                 $this->_listob->add($val);
             } else {
-                $tmp[] = rtrim(trim($val), ',');
+                $tmp[] = rtrim(trim(is_null($val) ? "" : $val), ',');
             }
         }
 
