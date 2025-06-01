@@ -136,7 +136,7 @@ class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Counta
      *
      * @return integer  The number of addresses.
      */
-    public function count()
+    public function count(): int
     {
         return count($this->addresses);
     }

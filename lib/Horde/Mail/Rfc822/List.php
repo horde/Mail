@@ -414,7 +414,7 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
         return $this->_ptr['key'];
     }
 
-    public function next(): mixed
+    public function next(): void
     {
         if (is_null($this->_ptr['subidx'])) {
             $curr = $this->current();

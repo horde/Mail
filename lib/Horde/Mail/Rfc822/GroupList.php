@@ -29,7 +29,7 @@ class Horde_Mail_Rfc822_GroupList extends Horde_Mail_Rfc822_List
      * @param mixed $obs  A RFC 822 object (or list of objects) to store in
      *                    this object.
      */
-    public function add($obs)
+    public function add($obs): void
     {
         if ($obs instanceof Horde_Mail_Rfc822_Object) {
             $obs = array($obs);
@@ -48,7 +48,7 @@ class Horde_Mail_Rfc822_GroupList extends Horde_Mail_Rfc822_List
      *
      * @return integer  The number of groups in the list.
      */
-    public function groupCount()
+    public function groupCount(): int
     {
         return 0;
     }
