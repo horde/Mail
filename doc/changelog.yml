@@ -1,16 +1,18 @@
 ---
-3.0.0alpha5:
-  api: 3.0.0alpha1
+3.0.0-alpha5:
+  api: 3.0.0-alpha1
   state:
     release: alpha
     api: alpha
-  date: 2022-10-08
+  date: 2025-06-01
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-    
-3.0.0alpha4:
+  notes: |
+    style: Formal php-cs-fixer run
+    style: use builtin base class signatures for seekableiterator and countable
+    fix: Horde_Mail_Rfc822_List does not consider Horde_Mime_Headers_Addresses
+3.0.0-alpha4:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -20,9 +22,10 @@
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
   notes: |
+    Original version string was 3.0.0alpha4
     [rla] Fix validation for identities without an email address
     |+
-3.0.0alpha3:
+3.0.0-alpha3:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -31,8 +34,10 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-3.0.0alpha2:
+  notes: |-
+    Original version string was 3.0.0alpha3
+    |+
+3.0.0-alpha2:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -41,8 +46,10 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-3.0.0alpha1:
+  notes: |-
+    Original version string was 3.0.0alpha2
+    |+
+3.0.0-alpha1:
   api: 3.0.0alpha1
   state:
     release: stable
@@ -52,6 +59,7 @@
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
   notes: |
+    Original version string was 3.0.0alpha1
     [mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.
 2.6.6:
   api: 2.6.0
@@ -336,6 +344,45 @@
     uri: http://www.horde.org/licenses/bsd
   notes: |
     [mms] Ensure bare address is output to SMTP MAIL command.
+2.0.0-beta2:
+  api: 2.0.0beta1
+  state:
+    release: beta
+    api: beta
+  date: 2012-08-29
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 2.0.0beta2
+    [mms] Add Horde_Mail_Rfc822_Address#matchDomain().
+    [mms] Add Horde_Mail_Rfc822_Address#matchInsensitive().
+    [mms] Fix parsing Return-Path header when using sendmail driver (Bug #11361).
+2.0.0-beta1:
+  api: 2.0.0beta1
+  state:
+    release: beta
+    api: beta
+  date: 2012-07-19
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 2.0.0beta1
+    First beta release for Horde 5.
+2.0.0-alpha1:
+  api: 2.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2012-07-05
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 2.0.0alpha1
+    First alpha release for Horde 5.
+    [mms] Implement new 2.0 API. See UPGRADING for full details of changes.
 2.0.0:
   api: 2.0.0
   state:
@@ -347,42 +394,6 @@
     uri: http://www.horde.org/licenses/bsd
   notes: |
     First stable release for Horde 5.
-2.0.0beta2:
-  api: 2.0.0beta1
-  state:
-    release: beta
-    api: beta
-  date: 2012-08-29
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Add Horde_Mail_Rfc822_Address#matchDomain().
-    [mms] Add Horde_Mail_Rfc822_Address#matchInsensitive().
-    [mms] Fix parsing Return-Path header when using sendmail driver (Bug #11361).
-2.0.0beta1:
-  api: 2.0.0beta1
-  state:
-    release: beta
-    api: beta
-  date: 2012-07-19
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First beta release for Horde 5.
-2.0.0alpha1:
-  api: 2.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2012-07-05
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First alpha release for Horde 5.
-    [mms] Implement new 2.0 API. See UPGRADING for full details of changes.
 1.2.1:
   api: 1.2.0
   state:
@@ -459,6 +470,55 @@
   notes: |
     [mms] Fix parseAddressList() for empty address strings (Bug #10534).
     [mms] Fix SMTP error codes/messages (Bug #10498).
+1.0.0-beta1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-16
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0beta1
+    First beta release for Horde 4.
+1.0.0-alpha1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-03-08
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0alpha1
+    First alpha release for Horde 4.
+1.0.0-RC2:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-29
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0RC2
+    Second release candidate for Horde 4.
+1.0.0-RC1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-22
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0RC1
+    First release candidate for Horde 4.
+    [jan] Fix passing arguments to sendmail binary (Gonçalo Queirós, Bug #9693).
 1.0.0:
   api: 1.0.0
   state:
@@ -470,48 +530,3 @@
     uri: http://www.horde.org/licenses/bsd
   notes: |
     First stable release for Horde 4.
-1.0.0RC2:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-29
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Second release candidate for Horde 4.
-1.0.0RC1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-22
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First release candidate for Horde 4.
-    [jan] Fix passing arguments to sendmail binary (Gonçalo Queirós, Bug #9693).
-1.0.0beta1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-16
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First beta release for Horde 4.
-1.0.0alpha1:
-  api: 1.0.0
-  state:
-    release: alpha
-    api: alpha
-  date: 2011-03-08
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First alpha release for Horde 4.
