@@ -121,7 +121,7 @@ class Horde_Mail_Rfc822_List
      *
      * @param mixed $obs  Address data to store in this object.
      */
-    public function add($obs)
+    public function add($obs): void
     {
         foreach ($this->_normalize($obs) as $val) {
             $this->_data[] = $val;
@@ -196,7 +196,7 @@ class Horde_Mail_Rfc822_List
      *
      * @return integer  The number of groups in the list.
      */
-    public function groupCount()
+    public function groupCount(): int
     {
         $ret = 0;
 
@@ -336,16 +336,14 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
-    #[\ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return !is_null($this[$offset]);
     }
 
     /**
      */
-    #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): ?Horde_Mail_Rfc822_Object
     {
         try {
             $this->seek($offset);
@@ -357,8 +355,7 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
-    #[\ReturnTypeWillChange]
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if ($ob = $this[$offset]) {
             if (is_null($this->_ptr['subidx'])) {
@@ -375,8 +372,7 @@ class Horde_Mail_Rfc822_List
 
     /**
      */
-    #[\ReturnTypeWillChange]
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         if ($ob = $this[$offset]) {
             if (is_null($this->_ptr['subidx'])) {
@@ -402,8 +398,7 @@ class Horde_Mail_Rfc822_List
     }
 
     /* Iterator methods. */
-    #[\ReturnTypeWillChange]
-    public function current()
+    public function current(): mixed
     {
         if (!$this->valid()) {
             return null;
@@ -415,14 +410,12 @@ class Horde_Mail_Rfc822_List
             ? $ob
             : $ob->addresses[$this->_ptr['subidx']];
     }
-    #[\ReturnTypeWillChange]
-    public function key()
+    public function key(): mixed
     {
         return $this->_ptr['key'];
     }
 
-    #[\ReturnTypeWillChange]
-    public function next()
+    public function next(): mixed
     {
         if (is_null($this->_ptr['subidx'])) {
             $curr = $this->current();
@@ -447,8 +440,7 @@ class Horde_Mail_Rfc822_List
         }
     }
 
-    #[\ReturnTypeWillChange]
-    public function rewind()
+    public function rewind(): void
     {
         $this->_ptr = array(
             'idx' => 0,
@@ -464,22 +456,20 @@ class Horde_Mail_Rfc822_List
         }
     }
 
-    #[\ReturnTypeWillChange]
-    public function valid()
+    public function valid(): bool
     {
         return (!empty($this->_ptr) && isset($this->_data[$this->_ptr['idx']]));
     }
 
-    #[\ReturnTypeWillChange]
-    public function seek($position)
+    public function seek(int $offset):void
     {
         if (!$this->valid() ||
-            ($position < $this->_ptr['key'])) {
+            ($offset < $this->_ptr['key'])) {
             $this->rewind();
         }
 
         for ($i = $this->_ptr['key']; ; ++$i) {
-            if ($i == $position) {
+            if ($i == $offset) {
                 return;
             }
 
