@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
  *
@@ -91,18 +92,19 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
     public function __set($name, $value)
     {
         switch ($name) {
-        case 'host':
-            try {
-                $value = Horde_Idna::decode($value);
-            } catch (Horde_Idna_Exception $e) {}
-            $this->_host = Horde_String::lower($value);
-            break;
+            case 'host':
+                try {
+                    $value = Horde_Idna::decode($value);
+                } catch (Horde_Idna_Exception $e) {
+                }
+                $this->_host = Horde_String::lower($value);
+                break;
 
-        case 'personal':
-            $this->_personal = !empty($value)
-                ? Horde_Mime::decode($value)
-                : null;
-            break;
+            case 'personal':
+                $this->_personal = !empty($value)
+                    ? Horde_Mime::decode($value)
+                    : null;
+                break;
         }
     }
 
@@ -112,47 +114,47 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
     public function __get($name)
     {
         switch ($name) {
-        case 'bare_address':
-            return is_null($this->host)
-                ? $this->mailbox
-                : $this->mailbox . '@' . $this->host;
+            case 'bare_address':
+                return is_null($this->host)
+                    ? $this->mailbox
+                    : $this->mailbox . '@' . $this->host;
 
-        case 'bare_address_idn':
-            $personal = $this->_personal;
-            $this->_personal = null;
-            $res = $this->encoded;
-            $this->_personal = $personal;
-            return $res;
+            case 'bare_address_idn':
+                $personal = $this->_personal;
+                $this->_personal = null;
+                $res = $this->encoded;
+                $this->_personal = $personal;
+                return $res;
 
-        case 'eai':
-            return is_null($this->mailbox)
-                ? false
-                : Horde_Mime::is8bit($this->mailbox);
+            case 'eai':
+                return is_null($this->mailbox)
+                    ? false
+                    : Horde_Mime::is8bit($this->mailbox);
 
-        case 'encoded':
-            return $this->writeAddress(true);
+            case 'encoded':
+                return $this->writeAddress(true);
 
-        case 'host':
-            return $this->_host;
+            case 'host':
+                return $this->_host;
 
-        case 'host_idn':
-            return Horde_Idna::encode($this->_host);
+            case 'host_idn':
+                return Horde_Idna::encode($this->_host);
 
-        case 'label':
-            return is_null($this->personal)
-                ? $this->bare_address
-                : $this->_personal;
+            case 'label':
+                return is_null($this->personal)
+                    ? $this->bare_address
+                    : $this->_personal;
 
-        case 'personal':
-            return $this->_personal === null || (strcasecmp($this->_personal, $this->bare_address) === 0)
-                ? null
-                : $this->_personal;
+            case 'personal':
+                return $this->_personal === null || (strcasecmp($this->_personal, $this->bare_address) === 0)
+                    ? null
+                    : $this->_personal;
 
-        case 'personal_encoded':
-            return Horde_Mime::encode($this->personal);
+            case 'personal_encoded':
+                return Horde_Mime::encode($this->personal);
 
-        case 'valid':
-            return !empty($this->mailbox);
+            case 'valid':
+                return !empty($this->mailbox);
         }
     }
 

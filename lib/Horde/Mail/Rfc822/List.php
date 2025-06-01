@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
  *
@@ -31,13 +32,11 @@
  * @property-read array $raw_addresses  The list of all addresses (Address
  *                                      objects).
  */
-class Horde_Mail_Rfc822_List
-    extends Horde_Mail_Rfc822_Object
-    implements ArrayAccess, Countable, SeekableIterator, Serializable
+class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAccess, Countable, SeekableIterator, Serializable
 {
     /** Filter masks. */
-    const HIDE_GROUPS = 1;
-    const BASE_ELEMENTS = 2;
+    public const HIDE_GROUPS = 1;
+    public const BASE_ELEMENTS = 2;
 
     /**
      * List data.
@@ -78,41 +77,41 @@ class Horde_Mail_Rfc822_List
     public function __get($name)
     {
         switch ($name) {
-        case 'addresses':
-        case 'bare_addresses':
-        case 'bare_addresses_idn':
-        case 'base_addresses':
-        case 'raw_addresses':
-            $old = $this->_filter;
-            $mask = ($name == 'base_addresses')
-                ? self::BASE_ELEMENTS
-                : self::HIDE_GROUPS;
-            $this->setIteratorFilter($mask, empty($old['filter']) ? null : $old['filter']);
+            case 'addresses':
+            case 'bare_addresses':
+            case 'bare_addresses_idn':
+            case 'base_addresses':
+            case 'raw_addresses':
+                $old = $this->_filter;
+                $mask = ($name == 'base_addresses')
+                    ? self::BASE_ELEMENTS
+                    : self::HIDE_GROUPS;
+                $this->setIteratorFilter($mask, empty($old['filter']) ? null : $old['filter']);
 
-            $out = array();
-            foreach ($this as $val) {
-                switch ($name) {
-                case 'addresses':
-                    $out[] = strval($val);
-                    break;
+                $out = array();
+                foreach ($this as $val) {
+                    switch ($name) {
+                        case 'addresses':
+                            $out[] = strval($val);
+                            break;
 
-                case 'bare_addresses':
-                    $out[] = $val->bare_address;
-                    break;
+                        case 'bare_addresses':
+                            $out[] = $val->bare_address;
+                            break;
 
-                case 'bare_addresses_idn':
-                    $out[] = $val->bare_address_idn;
-                    break;
+                        case 'bare_addresses_idn':
+                            $out[] = $val->bare_address_idn;
+                            break;
 
-                case 'base_addresses':
-                case 'raw_addresses':
-                    $out[] = clone $val;
-                    break;
+                        case 'base_addresses':
+                        case 'raw_addresses':
+                            $out[] = clone $val;
+                            break;
+                    }
                 }
-            }
 
-            $this->_filter = $old;
-            return $out;
+                $this->_filter = $old;
+                return $out;
         }
     }
 
@@ -461,7 +460,7 @@ class Horde_Mail_Rfc822_List
         return (!empty($this->_ptr) && isset($this->_data[$this->_ptr['idx']]));
     }
 
-    public function seek(int $offset):void
+    public function seek(int $offset): void
     {
         if (!$this->valid() ||
             ($offset < $this->_ptr['key'])) {

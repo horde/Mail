@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
  *
@@ -26,9 +27,7 @@
  * @property-read boolean $valid  Returns true if there is enough information
  *                                in object to create a valid address.
  */
-class Horde_Mail_Rfc822_Group
-    extends Horde_Mail_Rfc822_Object
-    implements Countable
+class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Countable
 {
     /**
      * List of group e-mail address objects.
@@ -76,9 +75,9 @@ class Horde_Mail_Rfc822_Group
     public function __set($name, $value)
     {
         switch ($name) {
-        case 'groupname':
-            $this->_groupname = Horde_Mime::decode($value);
-            break;
+            case 'groupname':
+                $this->_groupname = Horde_Mime::decode($value);
+                break;
         }
     }
 
@@ -87,15 +86,15 @@ class Horde_Mail_Rfc822_Group
     public function __get($name)
     {
         switch ($name) {
-        case 'groupname':
-        case 'label':
-            return $this->_groupname;
+            case 'groupname':
+            case 'label':
+                return $this->_groupname;
 
-        case 'groupname_encoded':
-            return Horde_Mime::encode($this->_groupname);
+            case 'groupname_encoded':
+                return Horde_Mime::encode($this->_groupname);
 
-        case 'valid':
-            return (bool)strlen($this->_groupname);
+            case 'valid':
+                return (bool)strlen($this->_groupname);
         }
     }
 
