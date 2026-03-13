@@ -39,5 +39,4 @@ dependencies:
       horde/smtp: ^2
       horde/stream_wrapper: ^3
       horde/test: ^3
-      pear/net_dns2: ^1.5
-      pear/net_smtp: ^1.9
+      mikepultz/netdns2: ^2.0

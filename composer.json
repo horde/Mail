@@ -27,8 +27,7 @@
         "horde/smtp": "^2 || dev-FRAMEWORK_6_0",
         "horde/stream_wrapper": "^3 || dev-FRAMEWORK_6_0",
         "horde/test": "^3 || dev-FRAMEWORK_6_0",
-        "pear/net_dns2": "^1.5",
-        "pear/net_smtp": "^1.9"
+        "mikepultz/netdns2": "^2.0"
     },
     "autoload": {
         "psr-0": {
