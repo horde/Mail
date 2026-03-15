@@ -1,4 +1,16 @@
 ---
+3.0.0-alpha6:
+  api: 3.0.0-alpha6
+  state:
+    release: alpha
+    api: alpha
+  date: 2026-03-15
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: |-
+    Merge pull request #8 from horde/feat/migrate-netdns2
+    feat: Drop PEAR dependencies
 3.0.0-alpha5:
   api: 3.0.0-alpha1
   state:

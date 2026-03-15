@@ -16,7 +16,7 @@ authors:
     active: false
     role: lead
 version:
-  release: 3.0.0-alpha5
+  release: 3.0.0-alpha6
   api: 3.0.0alpha1
 state:
   release: alpha
@@ -40,3 +40,4 @@ dependencies:
       horde/stream_wrapper: ^3
       horde/test: ^3
       mikepultz/netdns2: ^2.0
+vendor: horde
