@@ -11,16 +11,11 @@
             "role": "lead"
         }
     ],
-    "time": "2026-03-15",
-    "repositories": [
-        {"type": "path", "url": "../Exception"},
-        {"type": "path", "url": "../Idna"},
-        {"type": "path", "url": "../Mime"},
-        {"type": "path", "url": "../Stream_Filter"},
-        {"type": "path", "url": "../Translation"},
-        {"type": "path", "url": "../Util"},
-        {"type": "path", "url": "../Smtp"}
+    "keywords": [
+        "smtp"
     ],
+    "time": "2026-04-02",
+    "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
@@ -34,7 +29,6 @@
     "suggest": {
         "horde/smtp": "^2 || dev-FRAMEWORK_6_0",
         "horde/stream_wrapper": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "mikepultz/netdns2": "^2.0"
     },
     "autoload": {
@@ -44,7 +38,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Horde\\Mail\\Test\\": "test/"
+            "Horde\\Mail\\Test\\": "test/",
+            "Horde\\Mail\\Test\\Fixtures\\": "test/fixtures/"
         }
     },
     "config": {
@@ -54,6 +49,5 @@
         "branch-alias": {
             "dev-FRAMEWORK_6_0": "3.x-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }

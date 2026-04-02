@@ -1,4 +1,16 @@
 ---
+3.0.0-beta1:
+  api: 3.0.0-beta1
+  state:
+    release: beta
+    api: beta
+  date: 2026-04-02
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: |-
+    chore: Add returntypewillchange as we don't want to add signatures to lib/ right now
+    test: Modernize test suite
 3.0.0-alpha6:
   api: 3.0.0-alpha6
   state:
