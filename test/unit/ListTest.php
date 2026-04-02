@@ -7,13 +7,14 @@
  * @subpackage UnitTests
  */
 namespace Horde\Mail;
-use \Horde_Mime_Headers_Addresses;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Rfc822_Identification;
-use \Horde_Mail_Rfc822;
-use \Horde_Mail_Rfc822_List;
-use \Horde_Mail_Rfc822_Group;
-use \Horde_Mail_Rfc822_Address;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mime_Headers_Addresses;
+use Horde_Mail_Rfc822_Identification;
+use Horde_Mail_Rfc822;
+use Horde_Mail_Rfc822_List;
+use Horde_Mail_Rfc822_Group;
+use Horde_Mail_Rfc822_Address;
 
 class ListTest extends TestCase
 {
@@ -487,9 +488,7 @@ class ListTest extends TestCase
         $this->assertFalse($res->contains('foo4@example.com'));
     }
 
-    /**
-     * @dataProvider matchProvider
-     */
+    #[DataProvider('matchProvider')]
     public function testMatch($compare, $result)
     {
         $ob = new Horde_Mail_Rfc822_List(array(
@@ -504,7 +503,7 @@ class ListTest extends TestCase
         }
     }
 
-    public function matchProvider()
+    public static function matchProvider()
     {
         return array(
             array(array('foo@example.com'), false),

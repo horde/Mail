@@ -38,6 +38,8 @@ dependencies:
     composer:
       horde/smtp: ^2
       horde/stream_wrapper: ^3
-      horde/test: ^3
       mikepultz/netdns2: ^2.0
 vendor: horde
+keywords:
+  - smtp
+

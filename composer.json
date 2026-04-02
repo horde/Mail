@@ -12,7 +12,15 @@
         }
     ],
     "time": "2026-03-15",
-    "repositories": [],
+    "repositories": [
+        {"type": "path", "url": "../Exception"},
+        {"type": "path", "url": "../Idna"},
+        {"type": "path", "url": "../Mime"},
+        {"type": "path", "url": "../Stream_Filter"},
+        {"type": "path", "url": "../Translation"},
+        {"type": "path", "url": "../Util"},
+        {"type": "path", "url": "../Smtp"}
+    ],
     "require": {
         "php": "^7.4 || ^8",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
@@ -46,5 +54,6 @@
         "branch-alias": {
             "dev-FRAMEWORK_6_0": "3.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }

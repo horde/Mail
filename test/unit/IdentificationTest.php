@@ -13,7 +13,8 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Rfc822_Identification;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mail_Rfc822_Identification;
 
 /**
  * Test identification fields parsing code.
@@ -28,9 +29,7 @@ use \Horde_Mail_Rfc822_Identification;
  */
 class IdentificationTest extends TestCase
 {
-    /**
-     * @dataProvider provider
-     */
+    #[DataProvider('provider')]
     public function testParsing($value, $count)
     {
         $ob = new Horde_Mail_Rfc822_Identification($value);
@@ -41,7 +40,7 @@ class IdentificationTest extends TestCase
         );
     }
 
-    public function provider()
+    public static function provider()
     {
         return array(
             array(

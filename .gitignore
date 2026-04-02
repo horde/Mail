@@ -26,8 +26,8 @@ run-tests.log
 /test/*/*/*/*.exp
 /test/*/*/*/*.log
 /test/*/*/*/*.out
-
-
+composer.lock
+.phpunit.cache
 # Added by horde-components QC --fix-qc-issues
 # Build artifacts directory
 /build/

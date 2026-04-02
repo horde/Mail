@@ -8,8 +8,9 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Rfc822;
-use \Horde_Mail_Rfc822_Address;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mail_Rfc822;
+use Horde_Mail_Rfc822_Address;
 
 class ObjectTest extends TestCase
 {
@@ -146,9 +147,7 @@ class ObjectTest extends TestCase
         $this->assertTrue($ob->valid);
     }
 
-    /**
-     * @dataProvider commentOutputProvider
-     */
+    #[DataProvider('commentOutputProvider')]
     public function testCommentOutput($expected, $params)
     {
         $ob = new Horde_Mail_Rfc822_Address();
@@ -162,7 +161,7 @@ class ObjectTest extends TestCase
         );
     }
 
-    public function commentOutputProvider()
+    public static function commentOutputProvider()
     {
         $base_addr = array(
             'host' => 'example.com',
