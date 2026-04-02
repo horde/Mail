@@ -8,13 +8,12 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Rfc822_Address;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mail_Rfc822_Address;
 
 class AddressTest extends TestCase
 {
-    /**
-     * @dataProvider domainMatchProvider
-     */
+    #[DataProvider('domainMatchProvider')]
     public function testDomainMatch($addr, $tests)
     {
         $address = new Horde_Mail_Rfc822_Address($addr);
@@ -29,7 +28,7 @@ class AddressTest extends TestCase
         }
     }
 
-    public function domainMatchProvider()
+    public static function domainMatchProvider()
     {
         return array(
             array(
@@ -65,9 +64,7 @@ class AddressTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider personalIsSameAsEmailProvider
-     */
+    #[DataProvider('personalIsSameAsEmailProvider')]
     public function testPersonalIsSameAsEmail($addr, $expected)
     {
         $address = new Horde_Mail_Rfc822_Address($addr);
@@ -78,7 +75,7 @@ class AddressTest extends TestCase
         );
     }
 
-    public function personalIsSameAsEmailProvider()
+    public static function personalIsSameAsEmailProvider()
     {
         return array(
             array(
@@ -92,9 +89,7 @@ class AddressTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider labelProvider
-     */
+    #[DataProvider('labelProvider')]
     public function testLabel($in, $expected)
     {
         $address = new Horde_Mail_Rfc822_Address($in);
@@ -105,7 +100,7 @@ class AddressTest extends TestCase
         );
     }
 
-    public function labelProvider()
+    public static function labelProvider()
     {
         return array(
             array('foo@example.com', 'foo@example.com'),
@@ -113,9 +108,7 @@ class AddressTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider personalEncodedProvider
-     */
+    #[DataProvider('personalEncodedProvider')]
     public function testPersonalEncoded($in, $expected)
     {
         $address = new Horde_Mail_Rfc822_Address($in);
@@ -128,7 +121,7 @@ class AddressTest extends TestCase
         $this->assertFalse($address->eai);
     }
 
-    public function personalEncodedProvider()
+    public static function personalEncodedProvider()
     {
         return array(
             array('Foo <foo@example.com>', 'Foo'),
@@ -136,9 +129,7 @@ class AddressTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider eaiAddressesProvider
-     */
+    #[DataProvider('eaiAddressesProvider')]
     public function testEaiAddresses($in, $personal, $email)
     {
         $address = new Horde_Mail_Rfc822_Address($in);
@@ -154,7 +145,7 @@ class AddressTest extends TestCase
         $this->assertTrue($address->eai);
     }
 
-    public function eaiAddressesProvider()
+    public static function eaiAddressesProvider()
     {
         return array(
             /* Example from https://github.com/arnt/eai-test-messages */

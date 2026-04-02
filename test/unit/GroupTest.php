@@ -8,13 +8,12 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Rfc822_Group;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mail_Rfc822_Group;
 
 class GroupTest extends TestCase
 {
-    /**
-     * @dataProvider writeAddressProvider
-     */
+    #[DataProvider('writeAddressProvider')]
     public function testWriteAddress($addresses, $groupname, $encode,
                                      $expected)
     {
@@ -26,7 +25,7 @@ class GroupTest extends TestCase
         );
     }
 
-    public function writeAddressProvider()
+    public static function writeAddressProvider()
     {
         return array(
             array(
@@ -70,9 +69,7 @@ class GroupTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider encodingGroupnameProvider
-     */
+    #[DataProvider('encodingGroupnameProvider')]
     public function testEncodingGroupname($in, $expected)
     {
         $group_ob = new Horde_Mail_Rfc822_Group($in);
@@ -83,7 +80,7 @@ class GroupTest extends TestCase
         );
     }
 
-    public function encodingGroupnameProvider()
+    public static function encodingGroupnameProvider()
     {
         return array(
             array('Foo', 'Foo'),
@@ -91,9 +88,7 @@ class GroupTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider matchProvider
-     */
+    #[DataProvider('matchProvider')]
     public function testMatch($compare, $result)
     {
         $ob = new Horde_Mail_Rfc822_Group(
@@ -111,7 +106,7 @@ class GroupTest extends TestCase
         }
     }
 
-    public function matchProvider()
+    public static function matchProvider()
     {
         return array(
             array(array('foo@example.com'), false),

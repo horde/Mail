@@ -8,8 +8,9 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Rfc822;
-use \Horde_Mail_Rfc822_Address;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mail_Rfc822;
+use Horde_Mail_Rfc822_Address;
 
 class ParseTest extends TestCase
 {
@@ -61,9 +62,8 @@ class ParseTest extends TestCase
 
     /**
      * Test case for PEAR Mail:: bug #9137
-     *
-     * @dataProvider parseBug9137Provider
-     * */
+     */
+    #[DataProvider('parseBug9137Provider')]
     public function testParseBug9137($name, $email)
     {
         /* Throws Exception on error. */
@@ -74,7 +74,7 @@ class ParseTest extends TestCase
         $this->markTestSkipped('No Exception expected.');
     }
 
-    public function parseBug9137Provider()
+    public static function parseBug9137Provider()
     {
         return array(
             array('John Doe', 'test@example.com'),
@@ -86,9 +86,8 @@ class ParseTest extends TestCase
 
     /**
      * Test case for PEAR Mail:: bug #9137, take 2
-     *
-     * @dataProvider parseBug9137Take2Provider
      */
+    #[DataProvider('parseBug9137Take2Provider')]
     public function testParseBug9137Take2($raw, $fail)
     {
         if (!$fail) {
@@ -104,7 +103,7 @@ class ParseTest extends TestCase
         $this->markTestSkipped('No Exception expected.');
     }
 
-    public function parseBug9137Take2Provider()
+    public static function parseBug9137Take2Provider()
     {
         return array(
             array('"John Doe" <test@example.com>', false),
@@ -388,9 +387,7 @@ class ParseTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider utf8CharactersInAddressProvider
-     */
+    #[DataProvider('utf8CharactersInAddressProvider')]
     public function testUtf8CharactersInAddress($address, $valid_eai)
     {
         $this->expectException('Horde_Mail_Exception');
@@ -418,7 +415,7 @@ class ParseTest extends TestCase
 
     }
 
-    public function utf8CharactersInAddressProvider()
+    public static function utf8CharactersInAddressProvider()
     {
         return array(
             array('fooççç@example.com', true),
@@ -564,9 +561,7 @@ class ParseTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider bareMailboxWithoutDefaultDomainProvider
-     */
+    #[DataProvider('bareMailboxWithoutDefaultDomainProvider')]
     public function testBareMailboxWithoutDefaultDomainWithoutValidating($addr)
     {
         $res = $this->rfc822->parseAddressList($addr, array(
@@ -580,9 +575,7 @@ class ParseTest extends TestCase
         $this->assertNull($res[0]->host);
     }
 
-    /**
-     * @dataProvider bareMailboxWithoutDefaultDomainProvider
-     */
+    #[DataProvider('bareMailboxWithoutDefaultDomainProvider')]
     public function testBareMailboxWithoutDefaultDomainWhenValidating($addr)
     {
         $this->expectException('Horde_Mail_Exception');
@@ -593,7 +586,7 @@ class ParseTest extends TestCase
         ));
     }
 
-    public function bareMailboxWithoutDefaultDomainProvider()
+    public static function bareMailboxWithoutDefaultDomainProvider()
     {
         return array(
             array('foo'),

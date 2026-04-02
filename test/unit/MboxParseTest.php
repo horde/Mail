@@ -13,7 +13,8 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Mbox_Parse;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mail_Mbox_Parse;
 
 /**
  * Test the mbox parsing objecct.
@@ -30,7 +31,7 @@ class MboxParseTest extends TestCase
 {
     public function testMboxParse()
     {
-        $parse = new Horde_Mail_Mbox_Parse(__DIR__ . '/fixtures/test.mbox');
+        $parse = new Horde_Mail_Mbox_Parse(__DIR__ . '/../fixtures/test.mbox');
 
         $this->assertEquals(
             2,
@@ -55,9 +56,7 @@ class MboxParseTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider emlParseProvider
-     */
+    #[DataProvider('emlParseProvider')]
     public function testEmlParse($data, $first_line)
     {
         $parse = new Horde_Mail_Mbox_Parse($data);
@@ -79,15 +78,15 @@ class MboxParseTest extends TestCase
         );
     }
 
-    public function emlParseProvider()
+    public static function emlParseProvider()
     {
         return array(
             array(
-                __DIR__ . '/fixtures/test.eml',
+                __DIR__ . '/../fixtures/test.eml',
                 'Return-Path: <bugs@horde.org>'
             ),
             array(
-                __DIR__ . '/fixtures/test2.eml',
+                __DIR__ . '/../fixtures/test2.eml',
                 'Return-Path: <test@example.com>'
             )
         );

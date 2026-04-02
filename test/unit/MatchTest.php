@@ -8,13 +8,12 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Rfc822_Address;
+use PHPUnit\Framework\Attributes\DataProvider;
+use Horde_Mail_Rfc822_Address;
 
 class MatchTest extends TestCase
 {
-    /**
-     * @dataProvider matchProvider
-     */
+    #[DataProvider('matchProvider')]
     public function testMatch($in, $match, $expected)
     {
         $address = new Horde_Mail_Rfc822_Address($in);
@@ -25,7 +24,7 @@ class MatchTest extends TestCase
         );
     }
 
-    public function matchProvider()
+    public static function matchProvider()
     {
         $test1 = 'Test <test@example.com>';
         $test2 = 'Test <täst@example.com>';
@@ -59,9 +58,7 @@ class MatchTest extends TestCase
         );
     }
 
-    /**
-     * @dataProvider insensitiveMatchProvider
-     */
+    #[DataProvider('insensitiveMatchProvider')]
     public function testInsensitiveMatch($in, $match, $expected)
     {
         $address = new Horde_Mail_Rfc822_Address($in);
@@ -72,7 +69,7 @@ class MatchTest extends TestCase
         );
     }
 
-    public function insensitiveMatchProvider()
+    public static function insensitiveMatchProvider()
     {
         $test1 = 'Test <test@example.com>';
         $test2 = 'Test <täst@example.com>';

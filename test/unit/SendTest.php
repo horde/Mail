@@ -8,8 +8,8 @@
  */
 namespace Horde\Mail;
 use PHPUnit\Framework\TestCase;
-use \Horde_Mail_Transport_Mock;
-use \Horde_Mail_Rfc822_Address;
+use Horde_Mail_Transport_Mock;
+use Horde_Mail_Rfc822_Address;
 
 class SendTest extends TestCase
 {
