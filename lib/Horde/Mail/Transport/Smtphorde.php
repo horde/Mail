@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2013-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2013-2026 Horde LLC (http://www.horde.org/)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -101,7 +102,7 @@ class Horde_Mail_Transport_Smtphorde extends Horde_Mail_Transport
      *                    string or a Horde_Smtp_Password object (since
      *                    Horde_Smtp 1.1.0).
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         $this->_params = $params;
 
@@ -114,9 +115,9 @@ class Horde_Mail_Transport_Smtphorde extends Horde_Mail_Transport
     public function __get($name)
     {
         switch ($name) {
-        case 'eai':
-            $this->getSMTPObject();
-            return $this->_smtp->data_intl;
+            case 'eai':
+                $this->getSMTPObject();
+                return $this->_smtp->data_intl;
         }
 
         return parent::__get($name);
@@ -130,14 +131,14 @@ class Horde_Mail_Transport_Smtphorde extends Horde_Mail_Transport
         $this->getSMTPObject();
 
         $headers = $this->_sanitizeHeaders($headers);
-        list($from, $textHeaders) = $this->prepareHeaders($headers);
+        [$from, $textHeaders] = $this->prepareHeaders($headers);
         $from = $this->_getFrom($from, $headers);
 
-        $combine = Horde_Stream_Wrapper_Combine::getStream(array(
+        $combine = Horde_Stream_Wrapper_Combine::getStream([
             rtrim($textHeaders, $this->sep),
             $this->sep . $this->sep,
-            $body
-        ));
+            $body,
+        ]);
 
         try {
             $this->_smtp->send($from, $recipients, $combine);

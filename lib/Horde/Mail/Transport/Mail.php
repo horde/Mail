@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -50,7 +51,7 @@ class Horde_Mail_Transport_Mail extends Horde_Mail_Transport
      * @param array $params  Additional parameters:
      *   - args: (string) Extra arguments for the mail() function.
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         $this->_params = array_merge($this->_params, $params);
     }
@@ -77,7 +78,7 @@ class Horde_Mail_Transport_Mail extends Horde_Mail_Transport
         }
 
         // Flatten the headers out.
-        list(, $text_headers) = $this->prepareHeaders($headers);
+        [, $text_headers] = $this->prepareHeaders($headers);
 
         // mail() requires a string for $body. If resource, need to convert
         // to a string.
@@ -85,7 +86,7 @@ class Horde_Mail_Transport_Mail extends Horde_Mail_Transport
             $body_str = '';
 
             stream_filter_register('horde_eol', 'Horde_Stream_Filter_Eol');
-            stream_filter_append($body, 'horde_eol', STREAM_FILTER_READ, array('eol' => $this->sep));
+            stream_filter_append($body, 'horde_eol', STREAM_FILTER_READ, ['eol' => $this->sep]);
 
             rewind($body);
             while (!feof($body)) {
@@ -102,7 +103,7 @@ class Horde_Mail_Transport_Mail extends Horde_Mail_Transport
         if (empty($this->_params) || ini_get('safe_mode')) {
             $result = mail($recipients, $subject, $body, $text_headers);
         } else {
-            $result = mail($recipients, $subject, $body, $text_headers, isset($this->_params['args']) ? $this->_params['args'] : '');
+            $result = mail($recipients, $subject, $body, $text_headers, $this->_params['args'] ?? '');
         }
 
         // If the mail() function returned failure, we need to create an

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  * Copyright (c) 2010 Phil Kernick
  * All rights reserved.
  *
@@ -51,8 +52,6 @@ class Horde_Mail_Transport_Null extends Horde_Mail_Transport
 {
     /**
      */
-    public function send($recipients, array $headers, $body)
-    {
-    }
+    public function send($recipients, array $headers, $body) {}
 
 }

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you
  * did not receive this file, see http://www.horde.org/licenses/bsd.
@@ -24,8 +25,7 @@
  * @package   Mail
  * @since     2.5.0
  */
-class Horde_Mail_Mbox_Parse
-implements ArrayAccess, Countable, Iterator
+class Horde_Mail_Mbox_Parse implements ArrayAccess, Countable, Iterator
 {
     /**
      * Data stream.
@@ -42,7 +42,7 @@ implements ArrayAccess, Countable, Iterator
      *
      * @var array
      */
-    protected $_parsed = array();
+    protected $_parsed = [];
 
     /**
      * Constructor.
@@ -108,10 +108,10 @@ implements ArrayAccess, Countable, Iterator
                     $date = null;
                 }
 
-                $this->_parsed[] = array(
+                $this->_parsed[] = [
                     'date' => $date,
-                    'start' => ftell($this->_data)
-                );
+                    'start' => ftell($this->_data),
+                ];
             }
 
             /* Strip all empty lines before first data. */
@@ -122,10 +122,10 @@ implements ArrayAccess, Countable, Iterator
 
         /* This was a single message, not a MBOX file. */
         if (empty($this->_parsed)) {
-            $this->_parsed[] = array(
+            $this->_parsed[] = [
                 'date' => false,
-                'start' => $start
-            );
+                'start' => $start,
+            ];
         }
     }
 
@@ -133,7 +133,7 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return isset($this->_parsed[$offset]);
@@ -141,7 +141,7 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (!isset($this->_parsed[$offset])) {
@@ -169,11 +169,11 @@ implements ArrayAccess, Countable, Iterator
             );
         }
 
-        $out = array(
+        $out = [
             'data' => $fd,
             'date' => ($p['date'] === false) ? null : $p['date'],
-            'size' => intval(ftell($fd))
-        );
+            'size' => intval(ftell($fd)),
+        ];
         rewind($fd);
 
         return $out;
@@ -181,7 +181,7 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetSet($offset, $value)
     {
         // NOOP
@@ -189,7 +189,7 @@ implements ArrayAccess, Countable, Iterator
 
     /**
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetUnset($offset)
     {
         // NOOP
@@ -202,7 +202,7 @@ implements ArrayAccess, Countable, Iterator
      *
      * @return integer  The number of messages.
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function count()
     {
         return count($this->_parsed);
@@ -223,7 +223,7 @@ implements ArrayAccess, Countable, Iterator
 
     /* Iterator methods. */
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function current()
     {
         $key = $this->key();
@@ -233,13 +233,13 @@ implements ArrayAccess, Countable, Iterator
             : $this[$key];
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function key()
     {
         return key($this->_parsed);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function next()
     {
         if ($this->valid()) {
@@ -247,13 +247,13 @@ implements ArrayAccess, Countable, Iterator
         }
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function rewind()
     {
         reset($this->_parsed);
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function valid()
     {
         return !is_null($this->key());

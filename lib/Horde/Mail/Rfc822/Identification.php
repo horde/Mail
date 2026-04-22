@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you
  * did not receive this file, see http://www.horde.org/licenses/bsd.
@@ -30,7 +30,7 @@ class Horde_Mail_Rfc822_Identification extends Horde_Mail_Rfc822
      *
      * @var array
      */
-    public $ids = array();
+    public $ids = [];
 
     /**
      * Constructor.

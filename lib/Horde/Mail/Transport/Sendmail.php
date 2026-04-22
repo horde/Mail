@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2010-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2010-2026 Horde LLC (http://www.horde.org/)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -73,7 +74,7 @@ class Horde_Mail_Transport_Sendmail extends Horde_Mail_Transport
      *                    filesystem.
      *                    DEFAULT: /usr/sbin/sendmail
      */
-    public function __construct(array $params = array())
+    public function __construct(array $params = [])
     {
         if (isset($params['sendmail_args'])) {
             $this->_sendmailArgs = $params['sendmail_args'];
@@ -91,7 +92,7 @@ class Horde_Mail_Transport_Sendmail extends Horde_Mail_Transport
         $recipients = implode(' ', array_map('escapeshellarg', $this->parseRecipients($recipients)));
 
         $headers = $this->_sanitizeHeaders($headers);
-        list($from, $text_headers) = $this->prepareHeaders($headers);
+        [$from, $text_headers] = $this->prepareHeaders($headers);
         $from = $this->_getFrom($from, $headers);
 
         $mail = @popen($this->_sendmailPath . (empty($this->_sendmailArgs) ? '' : ' ' . $this->_sendmailArgs) . ' -f ' . escapeshellarg($from) . ' -- ' . $recipients, 'w');
@@ -105,7 +106,7 @@ class Horde_Mail_Transport_Sendmail extends Horde_Mail_Transport
 
         if (is_resource($body)) {
             stream_filter_register('horde_eol', 'Horde_Stream_Filter_Eol');
-            stream_filter_append($body, 'horde_eol', STREAM_FILTER_READ, array('eol' => $this->sep));
+            stream_filter_append($body, 'horde_eol', STREAM_FILTER_READ, ['eol' => $this->sep]);
 
             rewind($body);
             while (!feof($body)) {
@@ -121,72 +122,73 @@ class Horde_Mail_Transport_Sendmail extends Horde_Mail_Transport
         }
 
         switch ($result) {
-        case 64: // EX_USAGE
-            $msg = 'command line usage error';
-            break;
+            case 64: // EX_USAGE
+                $msg = 'command line usage error';
+                break;
 
-        case 65: // EX_DATAERR
-            $msg =  'data format error';
-            break;
+            case 65: // EX_DATAERR
+                $msg =  'data format error';
+                break;
 
-        case 66: // EX_NOINPUT
-            $msg = 'cannot open input';
-            break;
+            case 66: // EX_NOINPUT
+                $msg = 'cannot open input';
+                break;
 
-        case 67: // EX_NOUSER
-            $msg = 'addressee unknown';
-            break;
+            case 67: // EX_NOUSER
+                $msg = 'addressee unknown';
+                break;
 
-        case 68: // EX_NOHOST
-            $msg = 'host name unknown';
-            break;
+            case 68: // EX_NOHOST
+                $msg = 'host name unknown';
+                break;
 
-        case 69: // EX_UNAVAILABLE
-            $msg = 'service unavailable';
-            break;
+            case 69: // EX_UNAVAILABLE
+                $msg = 'service unavailable';
+                break;
 
-        case 70: // EX_SOFTWARE
-            $msg = 'internal software error';
-            break;
+            case 70: // EX_SOFTWARE
+                $msg = 'internal software error';
+                break;
 
-        case 71: // EX_OSERR
-            $msg = 'system error';
-            break;
+            case 71: // EX_OSERR
+                $msg = 'system error';
+                break;
 
-        case 72: // EX_OSFILE
-            $msg = 'critical system file missing';
-            break;
+            case 72: // EX_OSFILE
+                $msg = 'critical system file missing';
+                break;
 
-        case 73: // EX_CANTCREAT
-            $msg = 'cannot create output file';
-            break;
+            case 73: // EX_CANTCREAT
+                $msg = 'cannot create output file';
+                break;
 
-        case 74: // EX_IOERR
-            $msg = 'input/output error';
+            case 74: // EX_IOERR
+                $msg = 'input/output error';
 
-        case 75: // EX_TEMPFAIL
-            $msg = 'temporary failure';
-            break;
+                // no break
+            case 75: // EX_TEMPFAIL
+                $msg = 'temporary failure';
+                break;
 
-        case 76: // EX_PROTOCOL
-            $msg = 'remote error in protocol';
-            break;
+            case 76: // EX_PROTOCOL
+                $msg = 'remote error in protocol';
+                break;
 
-        case 77: // EX_NOPERM
-            $msg = 'permission denied';
-            break;
+            case 77: // EX_NOPERM
+                $msg = 'permission denied';
+                break;
 
-        case 78: // EX_CONFIG
-            $msg = 'configuration error';
-            break;
+            case 78: // EX_CONFIG
+                $msg = 'configuration error';
+                break;
 
-        case 79: // EX_NOTFOUND
-            $msg = 'entry not found';
-            break;
+            case 79: // EX_NOTFOUND
+                $msg = 'entry not found';
+                break;
 
-        default:
-            $msg = 'unknown error';
-            break;
+            default:
+                $msg = 'unknown error';
+                break;
         }
 
         throw new Horde_Mail_Exception('sendmail: ' . $msg . ' (' . $result . ')', $result);
