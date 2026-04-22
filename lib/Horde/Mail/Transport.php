@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 1997-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 1997-2026 Horde LLC (http://www.horde.org/)
  * Copyright (c) 2002-2007, Richard Heyes
  * All rights reserved.
  *
@@ -65,15 +66,15 @@ abstract class Horde_Mail_Transport
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      */
     public function __get($name)
     {
         switch ($name) {
-        case 'eai':
-            return false;
+            case 'eai':
+                return false;
         }
     }
 
@@ -125,17 +126,16 @@ abstract class Horde_Mail_Transport
     public function prepareHeaders(array $headers)
     {
         $from = null;
-        $lines = array();
-        $raw = isset($headers['_raw'])
-            ? $headers['_raw']
-            : null;
+        $lines = [];
+        $raw = $headers['_raw']
+            ?? null;
 
         foreach ($headers as $key => $value) {
             if (strcasecmp($key, 'From') === 0) {
                 $parser = new Horde_Mail_Rfc822();
-                $addresses = $parser->parseAddressList($value, array(
-                    'validate' => $this->eai ? 'eai' : true
-                ));
+                $addresses = $parser->parseAddressList($value, [
+                    'validate' => $this->eai ? 'eai' : true,
+                ]);
                 $from = $addresses[0]->bare_address;
 
                 // Reject envelope From: addresses with spaces.
@@ -145,9 +145,9 @@ abstract class Horde_Mail_Transport
 
                 $lines[] = $key . ': ' . $this->_normalizeEOL($value);
             } elseif (!$raw && (strcasecmp($key, 'Received') === 0)) {
-                $received = array();
+                $received = [];
                 if (!is_array($value)) {
-                    $value = array($value);
+                    $value = [$value];
                 }
 
                 foreach ($value as $line) {
@@ -168,7 +168,7 @@ abstract class Horde_Mail_Transport
             }
         }
 
-        return array($from, $raw ? $raw : implode($this->sep, $lines));
+        return [$from, $raw ? $raw : implode($this->sep, $lines)];
     }
 
     /**
@@ -189,9 +189,9 @@ abstract class Horde_Mail_Transport
         // for smtp recipients, etc. All relevant personal information
         // should already be in the headers.
         $rfc822 = new Horde_Mail_Rfc822();
-        return $rfc822->parseAddressList($recipients, array(
-            'validate' => $this->eai ? 'eai' : true
-        ))->bare_addresses_idn;
+        return $rfc822->parseAddressList($recipients, [
+            'validate' => $this->eai ? 'eai' : true,
+        ])->bare_addresses_idn;
     }
 
     /**
@@ -207,7 +207,7 @@ abstract class Horde_Mail_Transport
      */
     protected function _sanitizeHeaders($headers)
     {
-        foreach (array_diff(array_keys($headers), array('_raw')) as $key) {
+        foreach (array_diff(array_keys($headers), ['_raw']) as $key) {
             $headers[$key] = preg_replace('=((<CR>|<LF>|0x0A/%0A|0x0D/%0D|\\n|\\r)\S).*=i', '', $headers[$key]);
         }
 
@@ -223,11 +223,11 @@ abstract class Horde_Mail_Transport
      */
     protected function _normalizeEOL($data)
     {
-        return strtr($data, array(
+        return strtr($data, [
             "\r\n" => $this->sep,
             "\r" => $this->sep,
-            "\n" => $this->sep
-        ));
+            "\n" => $this->sep,
+        ]);
     }
 
     /**

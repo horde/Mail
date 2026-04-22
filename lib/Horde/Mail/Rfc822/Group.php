@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you
  * did not receive this file, see http://www.horde.org/licenses/bsd.
@@ -27,6 +27,8 @@
  * @property-read boolean $valid  Returns true if there is enough information
  *                                in object to create a valid address.
  */
+use Horde\Mail\Rfc2047;
+
 class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Countable
 {
     /**
@@ -64,9 +66,9 @@ class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Counta
             $this->addresses = clone $addresses;
         } else {
             $rfc822 = new Horde_Mail_Rfc822();
-            $this->addresses = $rfc822->parseAddressList($addresses, array(
-                'group' => true
-            ));
+            $this->addresses = $rfc822->parseAddressList($addresses, [
+                'group' => true,
+            ]);
         }
     }
 
@@ -76,7 +78,7 @@ class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Counta
     {
         switch ($name) {
             case 'groupname':
-                $this->_groupname = Horde_Mime::decode($value);
+                $this->_groupname = Rfc2047::decode($value);
                 break;
         }
     }
@@ -91,10 +93,10 @@ class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Counta
                 return $this->_groupname;
 
             case 'groupname_encoded':
-                return Horde_Mime::encode($this->_groupname);
+                return Rfc2047::encode($this->_groupname);
 
             case 'valid':
-                return (bool)strlen($this->_groupname);
+                return (bool) strlen($this->_groupname);
         }
     }
 
@@ -105,7 +107,7 @@ class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Counta
         $addr = $this->addresses->writeAddress($opts);
         $groupname = $this->groupname;
         if (!empty($opts['encode'])) {
-            $groupname = Horde_Mime::encode($groupname, $opts['encode']);
+            $groupname = Rfc2047::encode($groupname, $opts['encode']);
         }
         if (empty($opts['noquote'])) {
             $rfc822 = new Horde_Mail_Rfc822();
@@ -118,8 +120,8 @@ class Horde_Mail_Rfc822_Group extends Horde_Mail_Rfc822_Object implements Counta
             }
         }
 
-        return ltrim($groupname) . ':' .
-            (strlen($addr) ? (' ' . $addr) : '') . ';';
+        return ltrim($groupname) . ':'
+            . (strlen($addr) ? (' ' . $addr) : '') . ';';
     }
 
     /**

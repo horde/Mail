@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you
  * did not receive this file, see http://www.horde.org/licenses/bsd.
@@ -43,14 +43,14 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
      *
      * @var array
      */
-    protected $_data = array();
+    protected $_data = [];
 
     /**
      * Current Iterator filter.
      *
      * @var array
      */
-    protected $_filter = array();
+    protected $_filter = [];
 
     /**
      * Current Iterator pointer.
@@ -73,7 +73,7 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
 
     /**
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function __get($name)
     {
         switch ($name) {
@@ -88,7 +88,7 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
                     : self::HIDE_GROUPS;
                 $this->setIteratorFilter($mask, empty($old['filter']) ? null : $old['filter']);
 
-                $out = array();
+                $out = [];
                 foreach ($this as $val) {
                     switch ($name) {
                         case 'addresses':
@@ -138,7 +138,7 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
         $this->setIteratorFilter(self::HIDE_GROUPS | self::BASE_ELEMENTS);
 
         foreach ($this->_normalize($obs) as $val) {
-            $remove = array();
+            $remove = [];
 
             foreach ($this as $key => $val2) {
                 if ($val2->match($val)) {
@@ -160,7 +160,7 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
      */
     public function unique()
     {
-        $exist = $remove = array();
+        $exist = $remove = [];
 
         $old = $this->_filter;
         $this->setIteratorFilter(self::HIDE_GROUPS | self::BASE_ELEMENTS);
@@ -216,7 +216,7 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
      */
     public function setIteratorFilter($mask = 0, $filter = null)
     {
-        $this->_filter = array();
+        $this->_filter = [];
 
         if ($mask) {
             $this->_filter['mask'] = $mask;
@@ -232,7 +232,7 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
      */
     protected function _writeAddress($opts)
     {
-        $out = array();
+        $out = [];
 
         foreach ($this->_data as $val) {
             $out[] = $val->writeAddress($opts);
@@ -301,15 +301,15 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
      */
     protected function _normalize($obs)
     {
-        $add = array();
+        $add = [];
 
         if ($obs instanceof Horde_Mime_Headers_Addresses) {
             $obs = $obs->getAddressList();
         }
 
-        if (!($obs instanceof Horde_Mail_Rfc822_List) &&
-            !is_array($obs)) {
-            $obs = array($obs);
+        if (!($obs instanceof Horde_Mail_Rfc822_List)
+            && !is_array($obs)) {
+            $obs = [$obs];
         }
 
         foreach ($obs as $val) {
@@ -441,15 +441,15 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
 
     public function rewind(): void
     {
-        $this->_ptr = array(
+        $this->_ptr = [
             'idx' => 0,
             'key' => 0,
-            'subidx' => null
-        );
+            'subidx' => null,
+        ];
 
-        if ($this->valid() &&
-            !empty($this->_filter) &&
-            $this->_iteratorFilter($this->current())) {
+        if ($this->valid()
+            && !empty($this->_filter)
+            && $this->_iteratorFilter($this->current())) {
             $this->next();
             $this->_ptr['key'] = 0;
         }
@@ -462,8 +462,8 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
 
     public function seek(int $offset): void
     {
-        if (!$this->valid() ||
-            ($offset < $this->_ptr['key'])) {
+        if (!$this->valid()
+            || ($offset < $this->_ptr['key'])) {
             $this->rewind();
         }
 
@@ -482,19 +482,19 @@ class Horde_Mail_Rfc822_List extends Horde_Mail_Rfc822_Object implements ArrayAc
     protected function _iteratorFilter($ob)
     {
         if (!empty($this->_filter['mask'])) {
-            if (($this->_filter['mask'] & self::HIDE_GROUPS) &&
-                ($ob instanceof Horde_Mail_Rfc822_Group)) {
+            if (($this->_filter['mask'] & self::HIDE_GROUPS)
+                && ($ob instanceof Horde_Mail_Rfc822_Group)) {
                 return true;
             }
 
-            if (($this->_filter['mask'] & self::BASE_ELEMENTS) &&
-                !is_null($this->_ptr['subidx'])) {
+            if (($this->_filter['mask'] & self::BASE_ELEMENTS)
+                && !is_null($this->_ptr['subidx'])) {
                 return true;
             }
         }
 
-        if (!empty($this->_filter['filter']) &&
-            ($ob instanceof Horde_Mail_Rfc822_Address)) {
+        if (!empty($this->_filter['filter'])
+            && ($ob instanceof Horde_Mail_Rfc822_Address)) {
             foreach ($this->_filter['filter'] as $val) {
                 if ($ob->match($val)) {
                     return true;

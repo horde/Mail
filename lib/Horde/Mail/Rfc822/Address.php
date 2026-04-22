@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you
  * did not receive this file, see http://www.horde.org/licenses/bsd.
@@ -37,6 +37,8 @@
  * @property-read boolean $valid  Returns true if there is enough information
  *                                in object to create a valid address.
  */
+use Horde\Mail\Rfc2047;
+
 class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
 {
     /**
@@ -44,7 +46,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
      *
      * @var array
      */
-    public $comment = array();
+    public $comment = [];
 
     /**
      * Local-part of the address (UTF-8).
@@ -102,7 +104,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
 
             case 'personal':
                 $this->_personal = !empty($value)
-                    ? Horde_Mime::decode($value)
+                    ? Rfc2047::decode($value)
                     : null;
                 break;
         }
@@ -129,7 +131,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
             case 'eai':
                 return is_null($this->mailbox)
                     ? false
-                    : Horde_Mime::is8bit($this->mailbox);
+                    : Rfc2047::is8bit($this->mailbox);
 
             case 'encoded':
                 return $this->writeAddress(true);
@@ -151,7 +153,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
                     : $this->_personal;
 
             case 'personal_encoded':
-                return Horde_Mime::encode($this->personal);
+                return Rfc2047::encode($this->personal);
 
             case 'valid':
                 return !empty($this->mailbox);
@@ -164,7 +166,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
     {
         $rfc822 = new Horde_Mail_Rfc822();
 
-        $address = $rfc822->encode((string)$this->mailbox, 'address');
+        $address = $rfc822->encode((string) $this->mailbox, 'address');
         $host = empty($opts['idn']) ? $this->host : $this->host_idn;
         if (!empty($host)) {
             $address .= '@' . $host;
@@ -172,7 +174,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
         $personal = $this->personal;
         if (!empty($personal)) {
             if (!empty($opts['encode'])) {
-                $personal = Horde_Mime::encode($this->personal, $opts['encode']);
+                $personal = Rfc2047::encode($this->personal, $opts['encode']);
             }
             if (empty($opts['noquote'])) {
                 $personal = $rfc822->encode($personal, 'personal');

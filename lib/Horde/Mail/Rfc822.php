@@ -1,7 +1,8 @@
 <?php
+
 /**
  * Copyright (c) 2001-2010, Richard Heyes
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -64,7 +65,7 @@ class Horde_Mail_Rfc822
      * @deprecated
      * @since 2.0.3
      */
-    const ATEXT = '!#$%&\'*+-./0123456789=?ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~';
+    public const ATEXT = '!#$%&\'*+-./0123456789=?ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz{|}~';
 
     /**
      * Excluded (in ASCII decimal): 0-8, 10-31, 34, 40-41, 44, 58-60, 62, 64,
@@ -72,7 +73,7 @@ class Horde_Mail_Rfc822
      *
      * @since 2.0.3
      */
-    const ENCODE_FILTER = "\0\1\2\3\4\5\6\7\10\12\13\14\15\16\17\20\21\22\23\24\25\26\27\30\31\32\33\34\35\36\37\"(),:;<>@[\\]\177";
+    public const ENCODE_FILTER = "\0\1\2\3\4\5\6\7\10\12\13\14\15\16\17\20\21\22\23\24\25\26\27\30\31\32\33\34\35\36\37\"(),:;<>@[\\]\177";
 
     /**
      * The address string to parse.
@@ -93,7 +94,7 @@ class Horde_Mail_Rfc822
      *
      * @var string
      */
-    protected $_comments = array();
+    protected $_comments = [];
 
     /**
      * List object to return in parseAddressList().
@@ -107,7 +108,7 @@ class Horde_Mail_Rfc822
      *
      * @var array
      */
-    protected $_params = array();
+    protected $_params = [];
 
     /**
      * Data pointer.
@@ -142,7 +143,7 @@ class Horde_Mail_Rfc822
      *
      * @throws Horde_Mail_Exception
      */
-    public function parseAddressList($address, array $params = array())
+    public function parseAddressList($address, array $params = [])
     {
         if ($address instanceof Horde_Mail_Rfc822_List) {
             return $address;
@@ -152,20 +153,20 @@ class Horde_Mail_Rfc822
             $params['limit'] = -1;
         }
 
-        $this->_params = array_merge(array(
+        $this->_params = array_merge([
             'default_domain' => null,
-            'validate' => false
-        ), $params);
+            'validate' => false,
+        ], $params);
 
         $this->_listob = empty($this->_params['group'])
             ? new Horde_Mail_Rfc822_List()
             : new Horde_Mail_Rfc822_GroupList();
 
         if (!is_array($address)) {
-            $address = array($address);
+            $address = [$address];
         }
 
-        $tmp = array();
+        $tmp = [];
         foreach ($address as $val) {
             if ($val instanceof Horde_Mail_Rfc822_Object) {
                 $this->_listob->add($val);
@@ -188,34 +189,34 @@ class Horde_Mail_Rfc822
         return $ret;
     }
 
-   /**
-     * Quotes and escapes the given string if necessary using rules contained
-     * in RFC 2822 [3.2.5].
-     *
-     * @param string $str   The string to be quoted and escaped.
-     * @param string $type  Either 'address', 'comment' (@since 2.6.0), or
-     *                      'personal'.
-     *
-     * @return string  The correctly quoted and escaped string.
-     */
+    /**
+      * Quotes and escapes the given string if necessary using rules contained
+      * in RFC 2822 [3.2.5].
+      *
+      * @param string $str   The string to be quoted and escaped.
+      * @param string $type  Either 'address', 'comment' (@since 2.6.0), or
+      *                      'personal'.
+      *
+      * @return string  The correctly quoted and escaped string.
+      */
     public function encode($str, $type = 'address')
     {
         switch ($type) {
-        case 'comment':
-            // RFC 5322 [3.2.2]: Filter out non-printable US-ASCII and ( ) \
-            $filter = "\0\1\2\3\4\5\6\7\10\12\13\14\15\16\17\20\21\22\23\24\25\26\27\30\31\32\33\34\35\36\37\50\51\134\177";
-            break;
+            case 'comment':
+                // RFC 5322 [3.2.2]: Filter out non-printable US-ASCII and ( ) \
+                $filter = "\0\1\2\3\4\5\6\7\10\12\13\14\15\16\17\20\21\22\23\24\25\26\27\30\31\32\33\34\35\36\37\50\51\134\177";
+                break;
 
-        case 'personal':
-            // RFC 2822 [3.4]: Period not allowed in display name
-            $filter = self::ENCODE_FILTER . '.';
-            break;
+            case 'personal':
+                // RFC 2822 [3.4]: Period not allowed in display name
+                $filter = self::ENCODE_FILTER . '.';
+                break;
 
-        case 'address':
-        default:
-            // RFC 2822 [3.4.1]: (HTAB, SPACE) not allowed in address
-            $filter = self::ENCODE_FILTER . "\11\40";
-            break;
+            case 'address':
+            default:
+                // RFC 2822 [3.4.1]: (HTAB, SPACE) not allowed in address
+                $filter = self::ENCODE_FILTER . "\11\40";
+                break;
         }
 
         // Strip double quotes if they are around the string already.
@@ -261,26 +262,26 @@ class Horde_Mail_Rfc822
             try {
                 $this->_parseAddress();
             } catch (Horde_Mail_Exception $e) {
-               if ($this->_params['validate']) {
-                   throw $e;
-               }
-               ++$this->_ptr;
+                if ($this->_params['validate']) {
+                    throw $e;
+                }
+                ++$this->_ptr;
             }
 
             switch ($this->_curr()) {
-            case ',':
-                $this->_rfc822SkipLwsp(true);
-                break;
+                case ',':
+                    $this->_rfc822SkipLwsp(true);
+                    break;
 
-            case false:
-                // No-op
-                break;
+                case false:
+                    // No-op
+                    break;
 
-            default:
-               if ($this->_params['validate']) {
-                    throw new Horde_Mail_Exception('Error when parsing address list.');
-               }
-               break;
+                default:
+                    if ($this->_params['validate']) {
+                        throw new Horde_Mail_Exception('Error when parsing address list.');
+                    }
+                    break;
             }
         }
     }
@@ -334,16 +335,16 @@ class Horde_Mail_Rfc822
             $addresses->add($this->_parseMailbox());
 
             switch ($this->_curr()) {
-            case ',':
-                $this->_rfc822SkipLwsp(true);
-                break;
+                case ',':
+                    $this->_rfc822SkipLwsp(true);
+                    break;
 
-            case ';':
-                // No-op
-                break;
+                case ';':
+                    // No-op
+                    break;
 
-            default:
-                break 2;
+                default:
+                    break 2;
             }
         }
 
@@ -357,11 +358,11 @@ class Horde_Mail_Rfc822
      */
     protected function _parseMailbox()
     {
-        $this->_comments = array();
+        $this->_comments = [];
         $start = $this->_ptr;
 
         if (!($ob = $this->_parseNameAddr())) {
-            $this->_comments = array();
+            $this->_comments = [];
             $this->_ptr = $start;
             $ob = $this->_parseAddrSpec();
         }
@@ -495,7 +496,7 @@ class Horde_Mail_Rfc822
      */
     protected function _parseDomainList()
     {
-        $route = array();
+        $route = [];
 
         while ($this->_curr() !== false) {
             $this->_rfc822ParseDomain($str);
@@ -537,9 +538,9 @@ class Horde_Mail_Rfc822
             }
 
             $curr = $this->_curr();
-            if (($curr != '"') &&
-                ($curr != '.') &&
-                !$this->_rfc822IsAtext($curr)) {
+            if (($curr != '"')
+                && ($curr != '.')
+                && !$this->_rfc822IsAtext($curr)) {
                 break;
             }
 
@@ -562,22 +563,22 @@ class Horde_Mail_Rfc822
 
         while (($chr = $this->_curr(true)) !== false) {
             switch ($chr) {
-            case '"':
-                $this->_rfc822SkipLwsp();
-                return;
+                case '"':
+                    $this->_rfc822SkipLwsp();
+                    return;
 
-            case "\n":
-                /* Folding whitespace, remove the (CR)LF. */
-                if (substr($str, -1) == "\r") {
-                    $str = substr($str, 0, -1);
-                }
-                continue 2;
+                case "\n":
+                    /* Folding whitespace, remove the (CR)LF. */
+                    if (substr($str, -1) == "\r") {
+                        $str = substr($str, 0, -1);
+                    }
+                    continue 2;
 
-            case '\\':
-                if (($chr = $this->_curr(true)) === false) {
-                    break 2;
-                }
-                break;
+                case '\\':
+                    if (($chr = $this->_curr(true)) === false) {
+                        break 2;
+                    }
+                    break;
             }
 
             $str .= $chr;
@@ -643,9 +644,9 @@ class Horde_Mail_Rfc822
     {
         while ($this->_ptr < $this->_datalen) {
             $chr = $this->_data[$this->_ptr];
-            if (($chr != '.') &&
+            if (($chr != '.')
                 /* TODO: Optimize by duplicating rfc822IsAtext code here */
-                !$this->_rfc822IsAtext($chr, ',<:')) {
+                && !$this->_rfc822IsAtext($chr, ',<:')) {
                 $this->_rfc822SkipLwsp();
                 if (!$this->_params['validate'] && $str !== null) {
                     $str = trim($str);
@@ -702,15 +703,15 @@ class Horde_Mail_Rfc822
 
         while (($chr = $this->_curr(true)) !== false) {
             switch ($chr) {
-            case '\\':
-                if (($chr = $this->_curr(true)) === false) {
-                    break 2;
-                }
-                break;
+                case '\\':
+                    if (($chr = $this->_curr(true)) === false) {
+                        break 2;
+                    }
+                    break;
 
-            case ']':
-                $this->_rfc822SkipLwsp();
-                return;
+                case ']':
+                    $this->_rfc822SkipLwsp();
+                    return;
             }
 
             $str .= $chr;
@@ -732,19 +733,19 @@ class Horde_Mail_Rfc822
 
         while (($chr = $this->_curr()) !== false) {
             switch ($chr) {
-            case ' ':
-            case "\n":
-            case "\r":
-            case "\t":
-                ++$this->_ptr;
-                continue 2;
+                case ' ':
+                case "\n":
+                case "\r":
+                case "\t":
+                    ++$this->_ptr;
+                    continue 2;
 
-            case '(':
-                $this->_rfc822SkipComment();
-                break;
+                case '(':
+                    $this->_rfc822SkipComment();
+                    break;
 
-            default:
-                return;
+                default:
+                    return;
             }
         }
     }
@@ -763,22 +764,22 @@ class Horde_Mail_Rfc822
 
         while (($chr = $this->_curr(true)) !== false) {
             switch ($chr) {
-            case '(':
-                ++$level;
-                continue 2;
+                case '(':
+                    ++$level;
+                    continue 2;
 
-            case ')':
-                if (--$level == 0) {
-                    $this->_comments[] = $comment;
-                    return;
-                }
-                break;
+                case ')':
+                    if (--$level == 0) {
+                        $this->_comments[] = $comment;
+                        return;
+                    }
+                    break;
 
-            case '\\':
-                if (($chr = $this->_curr(true)) === false) {
-                    break 2;
-                }
-                break;
+                case '\\':
+                    if (($chr = $this->_curr(true)) === false) {
+                        break 2;
+                    }
+                    break;
             }
 
             $comment .= $chr;
@@ -818,20 +819,20 @@ class Horde_Mail_Rfc822
 
         /* "(),:;<>@[\] [DEL] */
         switch ($ord) {
-        case 34:
-        case 40:
-        case 41:
-        case 44:
-        case 58:
-        case 59:
-        case 60:
-        case 62:
-        case 64:
-        case 91:
-        case 92:
-        case 93:
-        case 127:
-            return false;
+            case 34:
+            case 40:
+            case 41:
+            case 44:
+            case 58:
+            case 59:
+            case 60:
+            case 62:
+            case 64:
+            case 91:
+            case 92:
+            case 93:
+            case 127:
+                return false;
         }
 
         return true;
@@ -889,7 +890,7 @@ class Horde_Mail_Rfc822
             : '/^([*+!.&#$|\'\\%\/0-9a-z^_`{}=?~:-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})$/i';
 
         return preg_match($regex, trim($data), $matches)
-            ? array($matches[1], $matches[2])
+            ? [$matches[1], $matches[2]]
             : false;
     }
 
