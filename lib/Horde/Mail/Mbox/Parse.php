@@ -80,6 +80,10 @@ class Horde_Mail_Mbox_Parse implements ArrayAccess, Countable, Iterator
 
             $line = fgets($this->_data);
 
+            if ($line === false) {
+                break;
+            }
+
             if (is_null($last_line)) {
                 ltrim($line);
             }
@@ -157,6 +161,9 @@ class Horde_Mail_Mbox_Parse implements ArrayAccess, Countable, Iterator
         fseek($this->_data, $p['start']);
         while (!feof($this->_data)) {
             $line = fgets($this->_data);
+            if ($line === false) {
+                break;
+            }
             if ($end && (ftell($this->_data) >= $end)) {
                 break;
             }
