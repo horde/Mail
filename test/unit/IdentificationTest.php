@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2012-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2012-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you
  * did not receive this file, see http://www.horde.org/licenses/bsd.
@@ -11,7 +12,9 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Rfc822_Identification;
@@ -26,6 +29,7 @@ use Horde_Mail_Rfc822_Identification;
  * @license    http://www.horde.org/licenses/bsd New BSD License
  * @package    Mail
  * @subpackage UnitTests
+ * @coversNothing
  */
 class IdentificationTest extends TestCase
 {
@@ -42,42 +46,42 @@ class IdentificationTest extends TestCase
 
     public static function provider()
     {
-        return array(
-            array(
+        return [
+            [
                 '<foo@example.com> <foo2@example.com> <foo3@example.com>',
-                3
-            ),
-            array(
+                3,
+            ],
+            [
                 '<foo@example.com><foo2@example.com><foo3@example.com>',
-                3
-            ),
-            array(
+                3,
+            ],
+            [
                 '<foo@example.com>, <foo2@example.com>,<foo3@example.com>',
-                3
-            ),
-            array(
+                3,
+            ],
+            [
                 '<foo@example.com>, <foo2@example.com>,<foo3@example.com> <foo4@example.com>     <foo5@example.com>  ',
-                5
-            ),
+                5,
+            ],
             // Bug #11953
-            array(
+            [
                 '<foo@example@example.com>',
-                1
-            ),
+                1,
+            ],
             // Parse non-compliant IDs
-            array(
+            [
                 'foo@example.com',
-                1
-            ),
-            array(
+                1,
+            ],
+            [
                 'foo@example.com  <foo2@example.com>',
-                2
-            ),
-            array(
+                2,
+            ],
+            [
                 'foo@example.com, <foo2@example.com>',
-                2
-            )
-        );
+                2,
+            ],
+        ];
     }
 
 }

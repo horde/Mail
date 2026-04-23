@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Michael Slusarz <slusarz@horde.org>
  * @license    http://www.horde.org/licenses/bsd BSD
@@ -6,12 +7,17 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Rfc822;
 use Horde_Mail_Rfc822_Address;
 
+/**
+ * @coversNothing
+ */
 class ParseTest extends TestCase
 {
     private $rfc822;
@@ -26,9 +32,9 @@ class ParseTest extends TestCase
     {
         $address = '"Test Student" <test@mydomain.com> (test)';
 
-        $result = $this->rfc822->parseAddressList($address, array(
-           'default_domain' => 'anydomain.com'
-        ));
+        $result = $this->rfc822->parseAddressList($address, [
+            'default_domain' => 'anydomain.com',
+        ]);
 
         $this->assertFalse($result instanceof Horde_Mail_Rfc822_List);
 
@@ -76,12 +82,12 @@ class ParseTest extends TestCase
 
     public static function parseBug9137Provider()
     {
-        return array(
-            array('John Doe', 'test@example.com'),
-            array('John Doe\\', 'test@example.com'),
-            array('John "Doe', 'test@example.com'),
-            array('John "Doe\\', 'test@example.com')
-        );
+        return [
+            ['John Doe', 'test@example.com'],
+            ['John Doe\\', 'test@example.com'],
+            ['John "Doe', 'test@example.com'],
+            ['John "Doe\\', 'test@example.com'],
+        ];
     }
 
     /**
@@ -91,9 +97,9 @@ class ParseTest extends TestCase
     public function testParseBug9137Take2($raw, $fail)
     {
         if (!$fail) {
-            $this->rfc822->parseAddressList($raw, array(
-                'validate' => true
-            ));
+            $this->rfc822->parseAddressList($raw, [
+                'validate' => true,
+            ]);
         }
 
         if ($fail) {
@@ -105,14 +111,14 @@ class ParseTest extends TestCase
 
     public static function parseBug9137Take2Provider()
     {
-        return array(
-            array('"John Doe" <test@example.com>', false),
-            array('"John Doe' . chr(92) . '" <test@example.com>', true),
-            array('"John Doe' . chr(92) . chr(92) . '" <test@example.com>', false),
-            array('"John Doe' . chr(92) . chr(92) . chr(92) . '" <test@example.com>', true),
-            array('"John Doe' . chr(92) . chr(92) . chr(92) . chr(92) . '" <test@example.com>', false),
-            array('"John Doe <test@example.com>', true)
-        );
+        return [
+            ['"John Doe" <test@example.com>', false],
+            ['"John Doe' . chr(92) . '" <test@example.com>', true],
+            ['"John Doe' . chr(92) . chr(92) . '" <test@example.com>', false],
+            ['"John Doe' . chr(92) . chr(92) . chr(92) . '" <test@example.com>', true],
+            ['"John Doe' . chr(92) . chr(92) . chr(92) . chr(92) . '" <test@example.com>', false],
+            ['"John Doe <test@example.com>', true],
+        ];
     }
 
     public function testGeneralParsing()
@@ -120,23 +126,23 @@ class ParseTest extends TestCase
         /* A simple, bare address. */
         $this->expectException('Horde_Mail_Exception');
         $address = 'user@example.com';
-        $result = $this->rfc822->parseAddressList($address, array(
-            'default_domain' => null
-        ));
+        $result = $this->rfc822->parseAddressList($address, [
+            'default_domain' => null,
+        ]);
 
         $this->assertFalse($result instanceof Horde_Mail_Rfc822_List);
         $this->assertTrue($result[0] instanceof Horde_Mail_Rfc822_Address);
         $this->assertEquals($result[0]->personal, '');
         $this->assertIsArray($result[0]->comment);
-        $this->assertEquals($result[0]->comment, array());
+        $this->assertEquals($result[0]->comment, []);
         $this->assertEquals($result[0]->mailbox, 'user');
         $this->assertEquals($result[0]->host, 'example.com');
 
         /* Address groups. */
         $address = 'My Group: "Richard" <richard@example.com> (A comment), ted@example.com (Ted Bloggs), Barney;';
-        $result = $this->rfc822->parseAddressList($address, array(
-            'default_domain' => null
-        ));
+        $result = $this->rfc822->parseAddressList($address, [
+            'default_domain' => null,
+        ]);
 
         $this->assertFalse($result instanceof Horde_Mail_Rfc822_List);
         $this->assertFalse($result[0] instanceof Horde_Mail_Rfc822_Group);
@@ -161,39 +167,40 @@ class ParseTest extends TestCase
         $this->assertIsObject($result[0]->addresses[2]);
         $this->assertEquals($result[0]->addresses[2]->personal, '');
         $this->assertIsArray($result[0]->addresses[2]->comment);
-        $this->assertEquals($result[0]->addresses[2]->comment, array());
+        $this->assertEquals($result[0]->addresses[2]->comment, []);
         $this->assertEquals($result[0]->addresses[2]->mailbox, 'Barney');
         $this->assertEmpty($result[0]->addresses[2]->host);
 
         /* A valid address with spaces in the local part. */
         $address = '<"Jon Parise"@php.net>';
-        $result = $this->rfc822->parseAddressList($address, array(
-            'default_domain' => null
-        ));
+        $result = $this->rfc822->parseAddressList($address, [
+            'default_domain' => null,
+        ]);
 
         $this->assertFalse($result instanceof Horde_Mail_Rfc822_List);
         $this->assertTrue($result[0] instanceof Horde_Mail_Rfc822_Address);
         $this->assertEquals($result[0]->personal, '');
         $this->assertIsArray($result[0]->comment);
-        $this->assertEquals($result[0]->comment, array());
+        $this->assertEquals($result[0]->comment, []);
         $this->assertEquals($result[0]->mailbox, 'Jon Parise');
         $this->assertEquals($result[0]->host, 'php.net');
 
         /* An invalid address with spaces in the local part. */
         $address = '<Jon Parise@php.net>';
         try {
-            $this->rfc822->parseAddressList($address, array(
-                'validate' => true
-            ));
+            $this->rfc822->parseAddressList($address, [
+                'validate' => true,
+            ]);
             $this->fail('An expected exception was not raised.');
-        } catch (Horde_Mail_Exception $e) {}
+        } catch (Horde_Mail_Exception $e) {
+        }
 
         /* A valid address with an uncommon TLD. */
         $address = 'jon@host.longtld';
         try {
-            $this->rfc822->parseAddressList($address, array(
-                'validate' => true
-            ));
+            $this->rfc822->parseAddressList($address, [
+                'validate' => true,
+            ]);
         } catch (Horde_Mail_Exception $e) {
             $this->fail('An unexpected exception was raised.');
         }
@@ -203,9 +210,9 @@ class ParseTest extends TestCase
     {
         $address_string = '"Joe Doe \(from Somewhere\)" <doe@example.com>, postmaster@example.com, root';
 
-        $res = $this->rfc822->parseAddressList($address_string, array(
-            'default_domain' => 'example.com'
-        ));
+        $res = $this->rfc822->parseAddressList($address_string, [
+            'default_domain' => 'example.com',
+        ]);
         $this->assertFalse($res instanceof Horde_Mail_Rfc822_List);
         $this->assertEquals(count($res), 3);
     }
@@ -215,19 +222,19 @@ class ParseTest extends TestCase
         $this->expectException('Horde_Mail_Exception');
         $ob = $this->rfc822->parseAddressList(
             'ß <test@example.com>',
-            array(
+            [
                 'default_domain' => 'example.com',
-                'validate' => true
-            )
+                'validate' => true,
+            ]
         );
 
         /* This technically shouldn't validate, but the parser is very liberal
          * about accepting characters within quotes. */
         $ob = $this->rfc822->parseAddressList(
             '"ß" <test@example.com>',
-            array(
-                'default_domain' => 'example.com'
-            )
+            [
+                'default_domain' => 'example.com',
+            ]
         );
     }
 
@@ -245,9 +252,9 @@ class ParseTest extends TestCase
     {
         $ob = $this->rfc822->parseAddressList(
             '"ß" <test@example.com>',
-            array(
-                'default_domain' => 'example.com'
-            )
+            [
+                'default_domain' => 'example.com',
+            ]
         );
 
         $this->assertEquals(
@@ -257,9 +264,9 @@ class ParseTest extends TestCase
 
         $ob = $this->rfc822->parseAddressList(
             'ß ß <test@example.com>',
-            array(
-                'default_domain' => 'example.com'
-            )
+            [
+                'default_domain' => 'example.com',
+            ]
         );
 
         $this->assertEquals(
@@ -274,9 +281,9 @@ class ParseTest extends TestCase
 
         $ob = $this->rfc822->parseAddressList(
             implode(', ', $email),
-            array(
-                'limit' => 5
-            )
+            [
+                'limit' => 5,
+            ]
         );
 
         $this->assertEquals(
@@ -339,9 +346,9 @@ class ParseTest extends TestCase
     {
         $ob = $this->rfc822->parseAddressList(
             'A <test@example.com>',
-            array(
-                'default_domain' => 'example.com'
-            )
+            [
+                'default_domain' => 'example.com',
+            ]
         );
 
         $this->assertEquals(
@@ -398,13 +405,13 @@ class ParseTest extends TestCase
             count($ob)
         );
 
-        $this->rfc822->parseAddressList($address, array(
-            'validate' => true
-        ));
+        $this->rfc822->parseAddressList($address, [
+            'validate' => true,
+        ]);
 
-        $this->rfc822->parseAddressList($address, array(
-            'validate' => 'eai'
-        ));
+        $this->rfc822->parseAddressList($address, [
+            'validate' => 'eai',
+        ]);
         if (!$valid_eai) {
             $this->fail('Expected Exception.');
         }
@@ -417,14 +424,14 @@ class ParseTest extends TestCase
 
     public static function utf8CharactersInAddressProvider()
     {
-        return array(
-            array('fooççç@example.com', true),
-            array('Jøran Øygårdvær <jøran@example.com>', true),
-            array('foo@üexample.com', true),
-            array('foo"ççç@example.com', false),
-            array('Jøran Øygårdvær <jør[an@example.com>', false),
-            array('f\10oo@üexample.com', false)
-        );
+        return [
+            ['fooççç@example.com', true],
+            ['Jøran Øygårdvær <jøran@example.com>', true],
+            ['foo@üexample.com', true],
+            ['foo"ççç@example.com', false],
+            ['Jøran Øygårdvær <jør[an@example.com>', false],
+            ['f\10oo@üexample.com', false],
+        ];
     }
 
     public function testParsingNonValidateAddressWithBareAddressAtFront()
@@ -460,10 +467,10 @@ class ParseTest extends TestCase
             $ob[0]->host
         );
 
-        $this->rfc822->parseAddressList($email, array(
-            'validate' => true
-        ));
-        
+        $this->rfc822->parseAddressList($email, [
+            'validate' => true,
+        ]);
+
     }
 
     public function testParsingSimpleString()
@@ -484,7 +491,7 @@ class ParseTest extends TestCase
 
         $this->assertEquals(
             $email,
-            (string)$ob[0]
+            (string) $ob[0]
         );
     }
 
@@ -516,9 +523,9 @@ class ParseTest extends TestCase
             $ob->writeAddress(true)
         );
 
-        $ob = $this->rfc822->parseAddressList($email, array(
-            'validate' => true
-        ));
+        $ob = $this->rfc822->parseAddressList($email, [
+            'validate' => true,
+        ]);
 
         $this->assertEquals(
             $email,
@@ -541,9 +548,9 @@ class ParseTest extends TestCase
     public function testDefaultDomain()
     {
         $address = 'foo@example2.com';
-        $result = $this->rfc822->parseAddressList($address, array(
-           'default_domain' => 'example.com'
-        ));
+        $result = $this->rfc822->parseAddressList($address, [
+            'default_domain' => 'example.com',
+        ]);
 
         $this->assertEquals(
             'foo@example2.com',
@@ -551,9 +558,9 @@ class ParseTest extends TestCase
         );
 
         $address = 'foo';
-        $result = $this->rfc822->parseAddressList($address, array(
-           'default_domain' => 'example.com'
-        ));
+        $result = $this->rfc822->parseAddressList($address, [
+            'default_domain' => 'example.com',
+        ]);
 
         $this->assertEquals(
             'foo@example.com',
@@ -564,12 +571,12 @@ class ParseTest extends TestCase
     #[DataProvider('bareMailboxWithoutDefaultDomainProvider')]
     public function testBareMailboxWithoutDefaultDomainWithoutValidating($addr)
     {
-        $res = $this->rfc822->parseAddressList($addr, array(
-            'default_domain' => null
-        ));
+        $res = $this->rfc822->parseAddressList($addr, [
+            'default_domain' => null,
+        ]);
 
         $this->assertEquals(
-             'foo',
+            'foo',
             $res[0]->mailbox
         );
         $this->assertNull($res[0]->host);
@@ -580,18 +587,18 @@ class ParseTest extends TestCase
     {
         $this->expectException('Horde_Mail_Exception');
 
-        $this->rfc822->parseAddressList($addr, array(
+        $this->rfc822->parseAddressList($addr, [
             'default_domain' => null,
-            'validate' => true
-        ));
+            'validate' => true,
+        ]);
     }
 
     public static function bareMailboxWithoutDefaultDomainProvider()
     {
-        return array(
-            array('foo'),
-            array('foo@')
-        );
+        return [
+            ['foo'],
+            ['foo@'],
+        ];
     }
 
 }

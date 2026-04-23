@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Copyright 2011-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
  *
  * See the enclosed file LICENSE for license information (BSD). If you
  * did not receive this file, see http://www.horde.org/licenses/bsd.
@@ -11,7 +12,9 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Mbox_Parse;
@@ -26,6 +29,7 @@ use Horde_Mail_Mbox_Parse;
  * @license    http://www.horde.org/licenses/bsd New BSD License
  * @package    Mail
  * @subpackage UnitTests
+ * @coversNothing
  */
 class MboxParseTest extends TestCase
 {
@@ -80,16 +84,16 @@ class MboxParseTest extends TestCase
 
     public static function emlParseProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 __DIR__ . '/../fixtures/test.eml',
-                'Return-Path: <bugs@horde.org>'
-            ),
-            array(
+                'Return-Path: <bugs@horde.org>',
+            ],
+            [
                 __DIR__ . '/../fixtures/test2.eml',
-                'Return-Path: <test@example.com>'
-            )
-        );
+                'Return-Path: <test@example.com>',
+            ],
+        ];
     }
 
     /**

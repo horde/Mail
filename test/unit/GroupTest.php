@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Michael Slusarz <slusarz@horde.org>
  * @category   Horde
@@ -6,47 +7,55 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Rfc822_Group;
 
+/**
+ * @coversNothing
+ */
 class GroupTest extends TestCase
 {
     #[DataProvider('writeAddressProvider')]
-    public function testWriteAddress($addresses, $groupname, $encode,
-                                     $expected)
-    {
+    public function testWriteAddress(
+        $addresses,
+        $groupname,
+        $encode,
+        $expected
+    ) {
         $group_ob = new Horde_Mail_Rfc822_Group($groupname, $addresses);
 
         $this->assertEquals(
             $expected,
-            $group_ob->writeAddress(array('encode' => $encode))
+            $group_ob->writeAddress(['encode' => $encode])
         );
     }
 
     public static function writeAddressProvider()
     {
-        return array(
-            array(
-                array(
+        return [
+            [
+                [
                     'Test <test@example.com>',
-                    'foo@example.com'
-                ),
+                    'foo@example.com',
+                ],
                 'Testing',
                 false,
-                'Testing: Test <test@example.com>, foo@example.com;'
-            ),
-            array(
-                array(
+                'Testing: Test <test@example.com>, foo@example.com;',
+            ],
+            [
+                [
                     'Fooã <test@example.com>',
-                    'foo@example.com'
-                ),
+                    'foo@example.com',
+                ],
                 'Group "Foo"',
                 true,
-                '"Group \"Foo\"": =?utf-8?b?Rm9vw6M=?= <test@example.com>, foo@example.com;'
-            )
-        );
+                '"Group \"Foo\"": =?utf-8?b?Rm9vw6M=?= <test@example.com>, foo@example.com;',
+            ],
+        ];
     }
 
     public function testValid()
@@ -82,10 +91,10 @@ class GroupTest extends TestCase
 
     public static function encodingGroupnameProvider()
     {
-        return array(
-            array('Foo', 'Foo'),
-            array('Aäb', '=?utf-8?b?QcOkYg==?=')
-        );
+        return [
+            ['Foo', 'Foo'],
+            ['Aäb', '=?utf-8?b?QcOkYg==?='],
+        ];
     }
 
     #[DataProvider('matchProvider')]
@@ -93,10 +102,10 @@ class GroupTest extends TestCase
     {
         $ob = new Horde_Mail_Rfc822_Group(
             'Testing',
-            array(
+            [
                 'foo@example.com',
-                'bar@example.com'
-            )
+                'bar@example.com',
+            ]
         );
 
         if ($result) {
@@ -108,12 +117,12 @@ class GroupTest extends TestCase
 
     public static function matchProvider()
     {
-        return array(
-            array(array('foo@example.com'), false),
-            array(array('bar@example.com'), false),
-            array(array('foo@example.com', 'bar@example.com'), true),
-            array(array('bar@example.com', 'foo@example.com'), true)
-        );
+        return [
+            [['foo@example.com'], false],
+            [['bar@example.com'], false],
+            [['foo@example.com', 'bar@example.com'], true],
+            [['bar@example.com', 'foo@example.com'], true],
+        ];
     }
 
 }

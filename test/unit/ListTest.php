@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Michael Slusarz <slusarz@horde.org>
  * @category   Horde
@@ -6,7 +7,9 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mime_Headers_Addresses;
@@ -16,6 +19,9 @@ use Horde_Mail_Rfc822_List;
 use Horde_Mail_Rfc822_Group;
 use Horde_Mail_Rfc822_Address;
 
+/**
+ * @coversNothing
+ */
 class ListTest extends TestCase
 {
     private $rfc822;
@@ -36,7 +42,7 @@ class ListTest extends TestCase
             count($res)
         );
 
-        $expected = array($email);
+        $expected = [$email];
 
         foreach ($res as $key => $val) {
             $this->assertEquals(
@@ -50,9 +56,9 @@ class ListTest extends TestCase
             $res->addresses
         );
 
-        $expected = array(
-            'test@example.com'
-        );
+        $expected = [
+            'test@example.com',
+        ];
 
         $this->assertEquals(
             $expected,
@@ -70,7 +76,7 @@ class ListTest extends TestCase
         $email = 'Test <test@example.com>';
 
         $res = $this->rfc822->parseAddressList($email);
-        $res->setIteratorFilter(0, array('test@example.com'));
+        $res->setIteratorFilter(0, ['test@example.com']);
 
         $this->assertEquals(
             0,
@@ -82,12 +88,12 @@ class ListTest extends TestCase
         }
 
         $this->assertEquals(
-            array(),
+            [],
             $res->addresses
         );
 
         $this->assertEquals(
-            array(),
+            [],
             $res->bare_addresses
         );
 
@@ -108,10 +114,10 @@ class ListTest extends TestCase
             count($res)
         );
 
-        $expected = array(
+        $expected = [
             'Test <test@example.com>',
-            'Test2 <test2@example.com>'
-        );
+            'Test2 <test2@example.com>',
+        ];
 
         foreach ($res as $key => $val) {
             $this->assertEquals(
@@ -125,10 +131,10 @@ class ListTest extends TestCase
             $res->addresses
         );
 
-        $expected = array(
+        $expected = [
             'test@example.com',
-            'test2@example.com'
-        );
+            'test2@example.com',
+        ];
 
         $this->assertEquals(
             $expected,
@@ -216,16 +222,16 @@ class ListTest extends TestCase
         $email = 'Test <test@example.com>, Test2 <test2@example.com>';
 
         $res = $this->rfc822->parseAddressList($email);
-        $res->setIteratorFilter(0, array('test@example.com'));
+        $res->setIteratorFilter(0, ['test@example.com']);
 
         $this->assertEquals(
             1,
             count($res)
         );
 
-        $expected = array(
-            'Test2 <test2@example.com>'
-        );
+        $expected = [
+            'Test2 <test2@example.com>',
+        ];
 
         foreach ($res as $key => $val) {
             $this->assertEquals(
@@ -239,9 +245,9 @@ class ListTest extends TestCase
             $res->addresses
         );
 
-        $expected = array(
-            'test2@example.com'
-        );
+        $expected = [
+            'test2@example.com',
+        ];
 
         $this->assertEquals(
             $expected,
@@ -265,13 +271,13 @@ class ListTest extends TestCase
             count($res)
         );
 
-        $expected = array(
+        $expected = [
             'Test <test@example.com>',
             'Group: foo@example.com, Foo 2 <foo2@example.com>;',
             'foo@example.com',
             'Foo 2 <foo2@example.com>',
-            'Test2 <test2@example.com>'
-        );
+            'Test2 <test2@example.com>',
+        ];
 
         foreach ($res as $key => $val) {
             $this->assertEquals(
@@ -287,12 +293,12 @@ class ListTest extends TestCase
             $res->addresses
         );
 
-        $expected = array(
+        $expected = [
             'test@example.com',
             'foo@example.com',
             'foo2@example.com',
-            'test2@example.com'
-        );
+            'test2@example.com',
+        ];
 
         $this->assertEquals(
             $expected,
@@ -310,19 +316,19 @@ class ListTest extends TestCase
         $email = 'Test <test@example.com>, Group: foo@example.com, Foo 2 <foo2@example.com>;, Test2 <test2@example.com>';
 
         $res = $this->rfc822->parseAddressList($email);
-        $res->setIteratorFilter(0, array('foo@example.com'));
+        $res->setIteratorFilter(0, ['foo@example.com']);
 
         $this->assertEquals(
             3,
             count($res)
         );
 
-        $expected = array(
+        $expected = [
             'Test <test@example.com>',
             'Group: foo@example.com, Foo 2 <foo2@example.com>;',
             'Foo 2 <foo2@example.com>',
-            'Test2 <test2@example.com>'
-        );
+            'Test2 <test2@example.com>',
+        ];
 
         foreach ($res as $key => $val) {
             $this->assertEquals(
@@ -338,11 +344,11 @@ class ListTest extends TestCase
             $res->addresses
         );
 
-        $expected = array(
+        $expected = [
             'test@example.com',
             'foo2@example.com',
-            'test2@example.com'
-        );
+            'test2@example.com',
+        ];
 
         $this->assertEquals(
             $expected,
@@ -351,12 +357,12 @@ class ListTest extends TestCase
 
         $res->setIteratorFilter(Horde_Mail_Rfc822_List::HIDE_GROUPS);
 
-        $expected = array(
+        $expected = [
             'Test <test@example.com>',
             'foo@example.com',
             'Foo 2 <foo2@example.com>',
-            'Test2 <test2@example.com>'
-        );
+            'Test2 <test2@example.com>',
+        ];
 
         foreach ($res as $key => $val) {
             $this->assertEquals(
@@ -491,10 +497,10 @@ class ListTest extends TestCase
     #[DataProvider('matchProvider')]
     public function testMatch($compare, $result)
     {
-        $ob = new Horde_Mail_Rfc822_List(array(
+        $ob = new Horde_Mail_Rfc822_List([
             'foo@example.com',
-            'bar@example.com'
-        ));
+            'bar@example.com',
+        ]);
 
         if ($result) {
             $this->assertTrue($ob->match($compare));
@@ -505,12 +511,12 @@ class ListTest extends TestCase
 
     public static function matchProvider()
     {
-        return array(
-            array(array('foo@example.com'), false),
-            array(array('bar@example.com'), false),
-            array(array('foo@example.com', 'bar@example.com'), true),
-            array(array('bar@example.com', 'foo@example.com'), true)
-        );
+        return [
+            [['foo@example.com'], false],
+            [['bar@example.com'], false],
+            [['foo@example.com', 'bar@example.com'], true],
+            [['bar@example.com', 'foo@example.com'], true],
+        ];
     }
 
     public function testSerialization()

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Michael Slusarz <slusarz@horde.org>
  * @category   Horde
@@ -6,11 +7,16 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Rfc822_Address;
 
+/**
+ * @coversNothing
+ */
 class MatchTest extends TestCase
 {
     #[DataProvider('matchProvider')]
@@ -29,33 +35,33 @@ class MatchTest extends TestCase
         $test1 = 'Test <test@example.com>';
         $test2 = 'Test <täst@example.com>';
 
-        return array(
-            array(
+        return [
+            [
                 $test1,
                 'Foo <test@example.com>',
-                true
-            ),
-            array(
+                true,
+            ],
+            [
                 $test1,
                 'Foo <test@EXAMPLE.COM>',
-                true
-            ),
-            array(
+                true,
+            ],
+            [
                 $test1,
                 'Foo <Test@example.com>',
-                false
-            ),
-            array(
+                false,
+            ],
+            [
                 $test2,
                 'Foo <test@example.com>',
-                false
-            ),
-            array(
+                false,
+            ],
+            [
                 $test2,
                 'täst@example.com',
-                true
-            )
-        );
+                true,
+            ],
+        ];
     }
 
     #[DataProvider('insensitiveMatchProvider')]
@@ -74,33 +80,33 @@ class MatchTest extends TestCase
         $test1 = 'Test <test@example.com>';
         $test2 = 'Test <täst@example.com>';
 
-        return array(
-            array(
+        return [
+            [
                 $test1,
                 'Foo <test@example.com>',
-                true
-            ),
-            array(
+                true,
+            ],
+            [
                 $test1,
                 'Foo <test@EXAMPLE.COM>',
-                true
-            ),
-            array(
+                true,
+            ],
+            [
                 $test1,
                 'Foo <Test@example.com>',
-                true
-            ),
-            array(
+                true,
+            ],
+            [
                 $test1,
                 'test1@example.com',
-                false
-            ),
-            array(
+                false,
+            ],
+            [
                 $test2,
                 'TäST@EXAMPLE.cOm',
-                true
-            )
-        );
+                true,
+            ],
+        ];
     }
 
 }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Michael Slusarz <slusarz@horde.org>
  * @category   Horde
@@ -6,12 +7,17 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Rfc822;
 use Horde_Mail_Rfc822_Address;
 
+/**
+ * @coversNothing
+ */
 class ObjectTest extends TestCase
 {
     public function testWriteAddress()
@@ -41,12 +47,12 @@ class ObjectTest extends TestCase
 
         $this->assertEquals(
             '=?utf-8?b?Rm9vw6M=?= <test@example.com>',
-            $result[0]->writeAddress(array('encode' => true))
+            $result[0]->writeAddress(['encode' => true])
         );
 
         $this->assertEquals(
             '=?iso-8859-1?b?Rm9v4w==?= <test@example.com>',
-            $result[0]->writeAddress(array('encode' => 'iso-8859-1'))
+            $result[0]->writeAddress(['encode' => 'iso-8859-1'])
         );
 
         $email = 'ß <test@example.com>';
@@ -54,7 +60,7 @@ class ObjectTest extends TestCase
 
         $this->assertEquals(
             '=?utf-8?b?w58=?= <test@example.com>',
-            $result[0]->writeAddress(array('encode' => true))
+            $result[0]->writeAddress(['encode' => true])
         );
 
         $email2 = 'ß X <test@example.com>';
@@ -62,7 +68,7 @@ class ObjectTest extends TestCase
 
         $this->assertEquals(
             '=?utf-8?b?w58=?= X <test@example.com>',
-            $result[0]->writeAddress(array('encode' => true))
+            $result[0]->writeAddress(['encode' => true])
         );
 
         $email3 = '"ß X" <test@example.com>';
@@ -70,7 +76,7 @@ class ObjectTest extends TestCase
 
         $this->assertEquals(
             '=?utf-8?b?w58=?= X <test@example.com>',
-            $result[0]->writeAddress(array('encode' => true))
+            $result[0]->writeAddress(['encode' => true])
         );
     }
 
@@ -157,61 +163,61 @@ class ObjectTest extends TestCase
 
         $this->assertEquals(
             $expected,
-            $ob->writeAddress(array('comment' => true))
+            $ob->writeAddress(['comment' => true])
         );
     }
 
     public static function commentOutputProvider()
     {
-        $base_addr = array(
+        $base_addr = [
             'host' => 'example.com',
             'mailbox' => 'foo',
-            'personal' => 'Foo'
-        );
+            'personal' => 'Foo',
+        ];
 
-        return array(
-            array(
+        return [
+            [
                 'Foo (Test Comment) <foo@example.com>',
-                array_merge($base_addr, array(
-                    'comment' => array(
-                        'Test Comment'
-                    )
-                ))
-            ),
-            array(
-                'Foo (Test Comment) (2nd Comment) <foo@example.com>',
-                array_merge($base_addr, array(
-                    'comment' => array(
+                array_merge($base_addr, [
+                    'comment' => [
                         'Test Comment',
-                        '2nd Comment'
-                    )
-                ))
-            ),
-            array(
+                    ],
+                ]),
+            ],
+            [
+                'Foo (Test Comment) (2nd Comment) <foo@example.com>',
+                array_merge($base_addr, [
+                    'comment' => [
+                        'Test Comment',
+                        '2nd Comment',
+                    ],
+                ]),
+            ],
+            [
                 'Foo ("Test (( Comment") <foo@example.com>',
-                array_merge($base_addr, array(
-                    'comment' => array(
-                        'Test (( Comment'
-                    )
-                ))
-            ),
-            array(
+                array_merge($base_addr, [
+                    'comment' => [
+                        'Test (( Comment',
+                    ],
+                ]),
+            ],
+            [
                 'Foo ("Test \"( Comment") <foo@example.com>',
-                array_merge($base_addr, array(
-                    'comment' => array(
-                        'Test "( Comment'
-                    )
-                ))
-            ),
-            array(
+                array_merge($base_addr, [
+                    'comment' => [
+                        'Test "( Comment',
+                    ],
+                ]),
+            ],
+            [
                 'Foo (Test "Comment") <foo@example.com>',
-                array_merge($base_addr, array(
-                    'comment' => array(
-                        'Test "Comment"'
-                    )
-                ))
-            )
-        );
+                array_merge($base_addr, [
+                    'comment' => [
+                        'Test "Comment"',
+                    ],
+                ]),
+            ],
+        ];
     }
 
 }

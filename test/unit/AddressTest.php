@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Michael Slusarz <slusarz@horde.org>
  * @category   Horde
@@ -6,11 +7,16 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Rfc822_Address;
 
+/**
+ * @coversNothing
+ */
 class AddressTest extends TestCase
 {
     #[DataProvider('domainMatchProvider')]
@@ -30,38 +36,38 @@ class AddressTest extends TestCase
 
     public static function domainMatchProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 'Test <test@example.com>',
-                array(
-                    array('example.com', true),
-                    array('foo.example.com', false)
-                )
-            ),
-            array(
+                [
+                    ['example.com', true],
+                    ['foo.example.com', false],
+                ],
+            ],
+            [
                 'Test <test@foo.example.com>',
-                array(
-                    array('example.com', true),
-                    array('foo.example.com', true)
-                )
-            ),
-            array(
+                [
+                    ['example.com', true],
+                    ['foo.example.com', true],
+                ],
+            ],
+            [
                 'Test <test@example.co.uk>',
-                array(
-                    array('example.co.uk', true),
-                    array('foo.example.co.uk', false),
-                    array('co.uk', true)
-                )
-            ),
-            array(
+                [
+                    ['example.co.uk', true],
+                    ['foo.example.co.uk', false],
+                    ['co.uk', true],
+                ],
+            ],
+            [
                 'Test <test@foo.example.co.uk>',
-                array(
-                    array('example.co.uk', true),
-                    array('foo.example.co.uk', true),
-                    array('co.uk', true)
-                )
-            )
-        );
+                [
+                    ['example.co.uk', true],
+                    ['foo.example.co.uk', true],
+                    ['co.uk', true],
+                ],
+            ],
+        ];
     }
 
     #[DataProvider('personalIsSameAsEmailProvider')]
@@ -77,16 +83,16 @@ class AddressTest extends TestCase
 
     public static function personalIsSameAsEmailProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 '"test@example.com" <test@example.com>',
-                'test@example.com'
-            ),
-            array(
+                'test@example.com',
+            ],
+            [
                 '"TEST@EXAMPLE.COM" <test@example.com>',
-                'test@example.com'
-            )
-        );
+                'test@example.com',
+            ],
+        ];
     }
 
     #[DataProvider('labelProvider')]
@@ -102,10 +108,10 @@ class AddressTest extends TestCase
 
     public static function labelProvider()
     {
-        return array(
-            array('foo@example.com', 'foo@example.com'),
-            array('Foo <foo@example.com>', 'Foo')
-        );
+        return [
+            ['foo@example.com', 'foo@example.com'],
+            ['Foo <foo@example.com>', 'Foo'],
+        ];
     }
 
     #[DataProvider('personalEncodedProvider')]
@@ -123,10 +129,10 @@ class AddressTest extends TestCase
 
     public static function personalEncodedProvider()
     {
-        return array(
-            array('Foo <foo@example.com>', 'Foo'),
-            array('Aäb <bar@example.com>', '=?utf-8?b?QcOkYg==?=')
-        );
+        return [
+            ['Foo <foo@example.com>', 'Foo'],
+            ['Aäb <bar@example.com>', '=?utf-8?b?QcOkYg==?='],
+        ];
     }
 
     #[DataProvider('eaiAddressesProvider')]
@@ -147,14 +153,14 @@ class AddressTest extends TestCase
 
     public static function eaiAddressesProvider()
     {
-        return array(
+        return [
             /* Example from https://github.com/arnt/eai-test-messages */
-            array(
+            [
                 'Jøran Øygårdvær <jøran@example.com>',
                 'Jøran Øygårdvær',
-                'jøran@example.com'
-            )
-        );
+                'jøran@example.com',
+            ],
+        ];
     }
 
 }

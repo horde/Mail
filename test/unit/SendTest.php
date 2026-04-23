@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     Michael Slusarz <slusarz@horde.org>
  * @category   Horde
@@ -6,11 +7,16 @@
  * @package    Mail
  * @subpackage UnitTests
  */
+
 namespace Horde\Mail;
+
 use PHPUnit\Framework\TestCase;
 use Horde_Mail_Transport_Mock;
 use Horde_Mail_Rfc822_Address;
 
+/**
+ * @coversNothing
+ */
 class SendTest extends TestCase
 {
     /* Test case for mixed EOLs. */
@@ -21,13 +27,13 @@ class SendTest extends TestCase
 
         $recipients = 'Test <test@example.com>';
         $body = "Foo\r\nBar\nBaz\rTest";
-        $headers = array(
+        $headers = [
             'To' => '<test2@example.com>',
             'From' => '<foo@example.com>',
             'Subject' => 'Test',
             'X-Test' => 'Line 1\r\n\tLine 2\n\tLine 3\r\tLine 4',
-            'X-Truncated-Header' => $body
-        );
+            'X-Truncated-Header' => $body,
+        ];
 
         $ob->send($recipients, $headers, $body);
 
@@ -62,15 +68,15 @@ class SendTest extends TestCase
 
         $ob = new Horde_Mail_Transport_Mock();
         $ob->send(
-            array($addr),
-            array(
-                'Return-Path' => $addr
-            ),
+            [$addr],
+            [
+                'Return-Path' => $addr,
+            ],
             'Foo'
         );
 
         $this->assertEquals(
-            array('test@xn--example-m2a.com'),
+            ['test@xn--example-m2a.com'],
             $ob->sentMessages[0]['recipients']
         );
 
@@ -85,7 +91,7 @@ class SendTest extends TestCase
         $this->expectException('Horde_Mail_Exception');
         $ob = new Horde_Mail_Transport_Mock();
 
-        $ob->send(array('foo@example.com'), array(), 'Foo');
+        $ob->send(['foo@example.com'], [], 'Foo');
     }
 
 }
