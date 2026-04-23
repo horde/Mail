@@ -103,9 +103,17 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
                 break;
 
             case 'personal':
-                $this->_personal = !empty($value)
-                    ? Rfc2047::decode($value)
-                    : null;
+                if (empty($value) || !is_scalar($value)) {
+                    $this->_personal = null;
+                    break;
+                }
+                $value = (string)$value;
+                try {
+                    $this->_personal = Rfc2047::decode($value);
+                } catch (Throwable $e) {
+                    // Gracefully keep raw value if malformed MIME data is set.
+                    $this->_personal = $value;
+                }
                 break;
         }
     }
