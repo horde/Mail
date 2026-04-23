@@ -28,15 +28,22 @@ dependencies:
   required:
     php: ^7.4 || ^8
     composer:
+      horde/eventdispatcher: ^1
       horde/exception: ^3
       horde/idna: ^2
       horde/mime: ^3
+      horde/stream: ^2
       horde/stream_filter: ^3
       horde/translation: ^3
       horde/util: ^3
+  dev:
+    composer:
+      horde/smtp: ^2
+      horde/socket_client: ^3
   optional:
     composer:
       horde/smtp: ^2
+      horde/socket_client: ^3
       horde/stream_wrapper: ^3
       mikepultz/netdns2: ^2.0
 vendor: horde

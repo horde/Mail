@@ -14,26 +14,35 @@
     "keywords": [
         "smtp"
     ],
-    "time": "2026-04-02",
+    "time": "2026-04-23",
     "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
-        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
-        "horde/idna": "^2 || dev-FRAMEWORK_6_0",
-        "horde/mime": "^3 || dev-FRAMEWORK_6_0",
-        "horde/stream_filter": "^3 || dev-FRAMEWORK_6_0",
-        "horde/translation": "^3 || dev-FRAMEWORK_6_0",
-        "horde/util": "^3 || dev-FRAMEWORK_6_0"
+        "horde/eventdispatcher": "^1",
+        "horde/exception": "^3",
+        "horde/idna": "^2",
+        "horde/mime": "^3",
+        "horde/stream": "^2",
+        "horde/stream_filter": "^3",
+        "horde/translation": "^3",
+        "horde/util": "^3"
     },
-    "require-dev": {},
+    "require-dev": {
+        "horde/smtp": "^2",
+        "horde/socket_client": "^3"
+    },
     "suggest": {
-        "horde/smtp": "^2 || dev-FRAMEWORK_6_0",
-        "horde/stream_wrapper": "^3 || dev-FRAMEWORK_6_0",
+        "horde/smtp": "^2",
+        "horde/socket_client": "^3",
+        "horde/stream_wrapper": "^3",
         "mikepultz/netdns2": "^2.0"
     },
     "autoload": {
         "psr-0": {
             "Horde_Mail": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Mail\\": "src/"
         }
     },
     "autoload-dev": {
@@ -49,5 +58,6 @@
         "branch-alias": {
             "dev-FRAMEWORK_6_0": "3.x-dev"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
