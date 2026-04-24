@@ -12,6 +12,7 @@ namespace Horde\Mail;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Mime_Headers_Addresses;
 use Horde_Mail_Rfc822_Identification;
 use Horde_Mail_Rfc822;
@@ -19,9 +20,7 @@ use Horde_Mail_Rfc822_List;
 use Horde_Mail_Rfc822_Group;
 use Horde_Mail_Rfc822_Address;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class ListTest extends TestCase
 {
     private $rfc822;

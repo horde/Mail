@@ -12,12 +12,11 @@ namespace Horde\Mail;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Mail_Rfc822;
 use Horde_Mail_Rfc822_Address;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class ParseTest extends TestCase
 {
     private $rfc822;

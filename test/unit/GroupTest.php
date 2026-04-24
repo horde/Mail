@@ -12,11 +12,10 @@ namespace Horde\Mail;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\CoversNothing;
 use Horde_Mail_Rfc822_Group;
 
-/**
- * @coversNothing
- */
+#[CoversNothing]
 class GroupTest extends TestCase
 {
     #[DataProvider('writeAddressProvider')]
