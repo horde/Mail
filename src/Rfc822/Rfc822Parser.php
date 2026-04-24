@@ -1,5 +1,22 @@
 <?php
 
+/**
+ * Copyright (c) 2001-2010, Richard Heyes
+ * Copyright (c) 2002-2011, Timo Sirainen
+ * Copyright 2011-2026 Horde LLC (http://www.horde.org/)
+ *
+ * See the enclosed file LICENSE for license information (BSD). If you
+ * did not receive this file, see http://www.horde.org/licenses/bsd.
+ *
+ * @author    Richard Heyes <richard@phpguru.org>
+ * @author    Chuck Hagenbuch <chuck@horde.org>
+ * @author    Michael Slusarz <slusarz@horde.org>
+ * @author    Timo Sirainen <tss@iki.fi>
+ * @category  Horde
+ * @license   http://www.horde.org/licenses/bsd New BSD License
+ * @package   Mail
+ */
+
 declare(strict_types=1);
 
 namespace Horde\Mail\Rfc822;
