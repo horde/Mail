@@ -292,12 +292,36 @@ class Horde_Mail_Rfc822
     protected function _parseAddress()
     {
         $start = $this->_ptr;
-        if (!$this->_parseGroup()) {
-            $this->_ptr = $start;
-            if ($mbox = $this->_parseMailbox()) {
-                $this->_listob->add($mbox);
+        try {
+            if ($this->_parseGroup()) {
+                return;
+            }
+        } catch (Horde_Mail_Exception $e) {
+            /* In non-strict mode, if an unterminated "group" is actually a
+             * name-addr with an unencoded ':' in the display-name (e.g.
+             * "ACME : The professional network <addr>"), recover by
+             * rewinding and falling back to _parseMailbox below. The
+             * fallback only triggers if a '<' is present in the current
+             * segment (before the next ',' or ';'). */
+            if (!empty($this->_params['validate'])
+                || !$this->_hasAngleAddrBeforeSeparator($start)) {
+                throw $e;
             }
         }
+        $this->_ptr = $start;
+        if ($mbox = $this->_parseMailbox()) {
+            $this->_listob->add($mbox);
+        }
+    }
+
+    /**
+     * Returns true if a '<' is present between $from and the next ',' or ';'.
+     */
+    protected function _hasAngleAddrBeforeSeparator($from)
+    {
+        $segment = substr($this->_data, $from);
+        $stop = strcspn($segment, '<,;');
+        return $stop < strlen($segment) && $segment[$stop] === '<';
     }
 
     /**
@@ -387,6 +411,22 @@ class Horde_Mail_Rfc822
         if ($ob = $this->_parseAngleAddr()) {
             $ob->personal = $personal;
             return $ob;
+        }
+
+        /* In non-strict mode, tolerate disallowed characters (e.g. ':') in
+         * the display-name by consuming everything up to the next angle-addr
+         * within the current segment (before the next ',' or ';'). */
+        if (empty($this->_params['validate']) && ($this->_curr() !== false)) {
+            $segment = substr($this->_data, $this->_ptr);
+            $stop = strcspn($segment, '<,;');
+            if ($stop < strlen($segment) && $segment[$stop] === '<') {
+                $extra = rtrim(substr($segment, 0, $stop));
+                $this->_ptr += $stop;
+                if ($ob = $this->_parseAngleAddr()) {
+                    $ob->personal = rtrim($personal . ' ' . $extra);
+                    return $ob;
+                }
+            }
         }
 
         return false;

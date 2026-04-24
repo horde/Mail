@@ -160,13 +160,34 @@ final class Rfc822Parser
     private function parseAddress(Rfc822ParserConfig $cfg): void
     {
         $start = $this->ptr;
-        if (!$this->parseGroup($cfg)) {
-            $this->ptr = $start;
-            $mbox = $this->parseMailbox($cfg);
-            if ($mbox !== null) {
-                $this->listob->add($mbox);
+        try {
+            if ($this->parseGroup($cfg)) {
+                return;
+            }
+        } catch (ParseException $e) {
+            /* In lenient mode, if an unterminated "group" is actually a
+             * name-addr with an unencoded ':' in the display-name (e.g.
+             * "ACME : The professional network <addr>"), recover by
+             * rewinding and falling back to parseMailbox below. The
+             * fallback only triggers if a '<' is present in the current
+             * segment (before the next ',' or ';'). */
+            if ($this->activeValidation !== ValidationMode::Lenient
+                || !$this->hasAngleAddrBeforeSeparator($start)) {
+                throw $e;
             }
         }
+        $this->ptr = $start;
+        $mbox = $this->parseMailbox($cfg);
+        if ($mbox !== null) {
+            $this->listob->add($mbox);
+        }
+    }
+
+    private function hasAngleAddrBeforeSeparator(int $from): bool
+    {
+        $segment = substr($this->data, $from);
+        $stop = strcspn($segment, '<,;');
+        return $stop < strlen($segment) && $segment[$stop] === '<';
     }
 
     private function parseGroup(Rfc822ParserConfig $cfg): bool
@@ -261,6 +282,25 @@ final class Rfc822Parser
         $this->parsePhrase($personal);
 
         $ob = $this->parseAngleAddr($cfg);
+
+        /* In lenient mode, tolerate disallowed characters (e.g. ':') in the
+         * display-name by consuming everything up to the next angle-addr
+         * within the current segment (before the next ',' or ';'). */
+        if ($ob === null
+            && $this->activeValidation === ValidationMode::Lenient
+            && $this->curr() !== false) {
+            $segment = substr($this->data, $this->ptr);
+            $stop = strcspn($segment, '<,;');
+            if ($stop < strlen($segment) && $segment[$stop] === '<') {
+                $extra = rtrim(substr($segment, 0, $stop));
+                $this->ptr += $stop;
+                $ob = $this->parseAngleAddr($cfg);
+                if ($ob !== null) {
+                    $personal = rtrim($personal . ' ' . $extra);
+                }
+            }
+        }
+
         if ($ob === null) {
             return null;
         }
