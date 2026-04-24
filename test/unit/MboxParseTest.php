@@ -29,8 +29,9 @@ use Horde_Mail_Mbox_Parse;
  * @license    http://www.horde.org/licenses/bsd New BSD License
  * @package    Mail
  * @subpackage UnitTests
- * @coversNothing
+ * 
  */
+#[CoversNothing]
 class MboxParseTest extends TestCase
 {
     public function testMboxParse()
