@@ -681,4 +681,21 @@ class Rfc822ParserTest extends TestCase
         $list = $parser->parseAddressList('user@example.com');
         $this->assertCount(1, $list);
     }
+
+    public function testDigitZeroInAddress(): void
+    {
+        $parser = $this->strictParser();
+
+        $list = $parser->parseAddressList('user0@example.com');
+        $this->assertCount(1, $list);
+        $this->assertSame('user0', $list->first()->mailbox);
+
+        $list = $parser->parseAddressList('0@example.com');
+        $this->assertCount(1, $list);
+        $this->assertSame('0', $list->first()->mailbox);
+
+        $list = $parser->parseAddressList('test@host0.example.com');
+        $this->assertCount(1, $list);
+        $this->assertSame('host0.example.com', $list->first()->host);
+    }
 }

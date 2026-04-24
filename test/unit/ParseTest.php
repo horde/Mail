@@ -601,4 +601,26 @@ class ParseTest extends TestCase
         ];
     }
 
+    public function testDigitZeroInAddress()
+    {
+        $ob = $this->rfc822->parseAddressList('user0@example.com', [
+            'validate' => true,
+        ]);
+        $this->assertEquals(1, count($ob));
+        $this->assertEquals('user0', $ob[0]->mailbox);
+        $this->assertEquals('example.com', $ob[0]->host);
+
+        $ob = $this->rfc822->parseAddressList('0@example.com', [
+            'validate' => true,
+        ]);
+        $this->assertEquals(1, count($ob));
+        $this->assertEquals('0', $ob[0]->mailbox);
+
+        $ob = $this->rfc822->parseAddressList('test@host0.example.com', [
+            'validate' => true,
+        ]);
+        $this->assertEquals(1, count($ob));
+        $this->assertEquals('host0.example.com', $ob[0]->host);
+    }
+
 }

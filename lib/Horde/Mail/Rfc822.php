@@ -803,7 +803,7 @@ class Horde_Mail_Rfc822
             return strcspn($chr, $validate);
         }
 
-        $ord = empty($chr) ? 0 : ord($chr);
+        $ord = ($chr === '' || $chr === null) ? 0 : ord($chr);
 
         /* UTF-8 characters check. */
         if ($ord > 127) {
