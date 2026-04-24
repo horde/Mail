@@ -472,6 +472,50 @@ class ParseTest extends TestCase
 
     }
 
+    /**
+     * RFC 5322 disallows ':' in an unquoted phrase, but mailers like
+     * AlumnForce/Swift produce From headers such as
+     *   "CONNECT : Le réseau ... <addr@host>"
+     * In non-strict mode the parser must recover and still return the address.
+     */
+    public function testParsingUnencodedColonInDisplayName()
+    {
+        $ob = $this->rfc822->parseAddressList(
+            'ACME : The professional network <contact@example.com>'
+        );
+
+        $this->assertEquals(1, count($ob));
+        $this->assertEquals('contact@example.com', $ob[0]->bare_address);
+        $this->assertEquals(
+            'ACME : The professional network',
+            $ob[0]->personal
+        );
+    }
+
+    public function testParsingUnencodedColonInDisplayNameFollowedByAddress()
+    {
+        $ob = $this->rfc822->parseAddressList(
+            'ACME : The professional network <a@b.com>, c@d.com'
+        );
+
+        $this->assertEquals(2, count($ob));
+        $this->assertEquals('a@b.com', $ob[0]->bare_address);
+        $this->assertEquals(
+            'ACME : The professional network',
+            $ob[0]->personal
+        );
+        $this->assertEquals('c@d.com', $ob[1]->bare_address);
+    }
+
+    public function testParsingUnencodedColonInDisplayNameStrictThrows()
+    {
+        $this->expectException('Horde_Mail_Exception');
+        $this->rfc822->parseAddressList(
+            'ACME : The professional network <contact@example.com>',
+            ['validate' => true]
+        );
+    }
+
     public function testParsingSimpleString()
     {
         $email = 'Test';

@@ -498,6 +498,41 @@ class Rfc822ParserTest extends TestCase
         $this->assertSame('example.com', $list->first()->host);
     }
 
+    // ── Unencoded ':' in display-name (lenient mode) ─────────────────
+    // RFC 5322 disallows ':' in an unquoted phrase, but mailers like
+    // AlumnForce/Swift produce From headers such as
+    //   "CONNECT : Le réseau ... <addr@host>"
+    // Make sure such malformed name-addr still yields the address.
+
+    public function testUnencodedColonInDisplayNameLenient(): void
+    {
+        $list = $this->parser()->parseAddressList(
+            'ACME : The professional network <contact@example.com>'
+        );
+        $this->assertCount(1, $list);
+        $addr = $list->first();
+        $this->assertSame('contact@example.com', $addr->bareAddress());
+        $this->assertSame('ACME : The professional network', $addr->personal);
+    }
+
+    public function testUnencodedColonInDisplayNameFollowedByAnotherAddress(): void
+    {
+        $list = $this->parser()->parseAddressList(
+            'ACME : The professional network <a@b.com>, c@d.com'
+        );
+        $this->assertCount(2, $list);
+        $this->assertSame('a@b.com', $list->first()->bareAddress());
+        $this->assertSame('ACME : The professional network', $list->first()->personal);
+    }
+
+    public function testUnencodedColonInDisplayNameStrictStillThrows(): void
+    {
+        $this->expectException(ParseException::class);
+        $this->strictParser()->parseAddressList(
+            'ACME : The professional network <contact@example.com>'
+        );
+    }
+
     // ── Uncommon TLD ─────────────────────────────────────────────────
 
     public function testUncommonTldAccepted(): void
