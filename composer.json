@@ -14,27 +14,27 @@
     "keywords": [
         "smtp"
     ],
-    "time": "2026-04-23",
+    "time": "2026-04-27",
     "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
-        "horde/eventdispatcher": "^1",
-        "horde/exception": "^3",
-        "horde/idna": "^2",
-        "horde/mime": "^3",
-        "horde/stream": "^2",
-        "horde/stream_filter": "^3",
-        "horde/translation": "^3",
-        "horde/util": "^3"
+        "horde/eventdispatcher": "^1 || dev-FRAMEWORK_6_0",
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/idna": "^2 || dev-FRAMEWORK_6_0",
+        "horde/mime": "^3 || dev-FRAMEWORK_6_0",
+        "horde/stream": "^2 || dev-FRAMEWORK_6_0",
+        "horde/stream_filter": "^3 || dev-FRAMEWORK_6_0",
+        "horde/translation": "^3 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "require-dev": {
-        "horde/smtp": "^2",
-        "horde/socket_client": "^3"
+        "horde/smtp": "^2 || dev-FRAMEWORK_6_0",
+        "horde/socket_client": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
-        "horde/smtp": "^2",
-        "horde/socket_client": "^3",
-        "horde/stream_wrapper": "^3",
+        "horde/smtp": "^2 || dev-FRAMEWORK_6_0",
+        "horde/socket_client": "^3 || dev-FRAMEWORK_6_0",
+        "horde/stream_wrapper": "^3 || dev-FRAMEWORK_6_0",
         "mikepultz/netdns2": "^2.0"
     },
     "autoload": {
@@ -58,6 +58,5 @@
         "branch-alias": {
             "dev-FRAMEWORK_6_0": "3.x-dev"
         }
-    },
-    "minimum-stability": "dev"
+    }
 }
