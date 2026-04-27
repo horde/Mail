@@ -533,6 +533,12 @@ class Rfc822ParserTest extends TestCase
         );
     }
 
+    public function testUnencodedColonWithoutAngleBracketDropsAddress(): void
+    {
+        $list = $this->parser()->parseAddressList('Foo: bar');
+        $this->assertCount(0, $list);
+    }
+
     // ── Uncommon TLD ─────────────────────────────────────────────────
 
     public function testUncommonTldAccepted(): void

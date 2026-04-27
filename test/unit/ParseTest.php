@@ -516,6 +516,13 @@ class ParseTest extends TestCase
         );
     }
 
+    public function testParsingUnencodedColonWithoutAngleBracketDropsAddress()
+    {
+        $ob = $this->rfc822->parseAddressList('Foo: bar');
+
+        $this->assertEquals(0, count($ob));
+    }
+
     public function testParsingSimpleString()
     {
         $email = 'Test';
