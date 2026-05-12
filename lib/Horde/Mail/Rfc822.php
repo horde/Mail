@@ -162,8 +162,12 @@ class Horde_Mail_Rfc822
             ? new Horde_Mail_Rfc822_List()
             : new Horde_Mail_Rfc822_GroupList();
 
+        if (!is_array($address)) {
+            $address = [$address];
+        }
+
         $tmp = [];
-        foreach ((array) $address as $val) {
+        foreach ($address as $val) {
             if ($val instanceof Horde_Mail_Rfc822_Object) {
                 $this->_listob->add($val);
             } else {
@@ -171,7 +175,7 @@ class Horde_Mail_Rfc822
             }
         }
 
-        if ($tmp) {
+        if (!empty($tmp)) {
             $this->_data = implode(',', $tmp);
             $this->_datalen = strlen($this->_data);
             $this->_ptr = 0;
