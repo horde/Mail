@@ -162,6 +162,12 @@ class Horde_Mail_Rfc822
             ? new Horde_Mail_Rfc822_List()
             : new Horde_Mail_Rfc822_GroupList();
 
+        // Wrap a single value (string or Horde_Mail_Rfc822_Object) into a
+        // one-element list. Do NOT use (array) $address here: casting an
+        // object yields its property array (e.g. Rfc822_Address::$comment
+        // === []), which would then break trim() in the loop below with
+        // "trim(): Argument #1 ($string) must be of type string, array
+        // given" on PHP 8.1+.
         if (!is_array($address)) {
             $address = [$address];
         }
