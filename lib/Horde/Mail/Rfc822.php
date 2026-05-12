@@ -176,12 +176,12 @@ class Horde_Mail_Rfc822
         foreach ($address as $val) {
             if ($val instanceof Horde_Mail_Rfc822_Object) {
                 $this->_listob->add($val);
-            } else {
+            } elseif ($val !== null) {
                 $tmp[] = rtrim(trim($val), ',');
             }
         }
 
-        if (!empty($tmp)) {
+        if ($tmp) {
             $this->_data = implode(',', $tmp);
             $this->_datalen = strlen($this->_data);
             $this->_ptr = 0;
