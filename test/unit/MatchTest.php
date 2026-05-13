@@ -12,10 +12,10 @@ namespace Horde\Mail;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Horde_Mail_Rfc822_Address;
 
-#[CoversNothing]
+#[CoversClass(Horde_Mail_Rfc822_Address::class)]
 class MatchTest extends TestCase
 {
     #[DataProvider('matchProvider')]

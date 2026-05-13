@@ -17,7 +17,7 @@ namespace Horde\Mail;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Horde_Mail_Rfc822_Identification;
 
 /**
@@ -30,9 +30,9 @@ use Horde_Mail_Rfc822_Identification;
  * @license    http://www.horde.org/licenses/bsd New BSD License
  * @package    Mail
  * @subpackage UnitTests
- * 
+ *
  */
-#[CoversNothing]
+#[CoversClass(Horde_Mail_Rfc822_Identification::class)]
 class IdentificationTest extends TestCase
 {
     #[DataProvider('provider')]

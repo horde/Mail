@@ -10,12 +10,12 @@
 
 namespace Horde\Mail;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Horde_Mail_Transport_Mock;
 use Horde_Mail_Rfc822_Address;
 
-#[CoversNothing]
+#[CoversClass(Horde_Mail_Transport_Mock::class)]
 class SendTest extends TestCase
 {
     /* Test case for mixed EOLs. */

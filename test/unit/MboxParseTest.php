@@ -16,6 +16,7 @@
 namespace Horde\Mail;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Horde_Mail_Mbox_Parse;
 
@@ -29,9 +30,9 @@ use Horde_Mail_Mbox_Parse;
  * @license    http://www.horde.org/licenses/bsd New BSD License
  * @package    Mail
  * @subpackage UnitTests
- * 
+ *
  */
-#[CoversNothing]
+#[CoversClass(Horde_Mail_Mbox_Parse::class)]
 class MboxParseTest extends TestCase
 {
     public function testMboxParse()

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Horde\Mail\Test\Unit\Rfc822;
 
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 use Horde\Mail\Rfc822\ValidationMode;
 use PHPUnit\Framework\TestCase;
 
-#[CoversNothing]
+#[CoversClass(ValidationMode::class)]
 class ValidationModeTest extends TestCase
 {
     public function testCasesExist(): void
