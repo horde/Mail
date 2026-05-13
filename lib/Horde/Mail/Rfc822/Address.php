@@ -107,7 +107,7 @@ class Horde_Mail_Rfc822_Address extends Horde_Mail_Rfc822_Object
                     $this->_personal = null;
                     break;
                 }
-                $value = (string)$value;
+                $value = (string) $value;
                 try {
                     $this->_personal = Rfc2047::decode($value);
                 } catch (Throwable $e) {
