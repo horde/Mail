@@ -673,4 +673,84 @@ class ParseTest extends TestCase
         $this->assertEquals('host0.example.com', $ob[0]->host);
     }
 
+    /**
+     * Passing a Horde_Mail_Rfc822_Address object must not destructure it.
+     * Regression: PR #16 used (array) cast which converts object properties
+     * into array entries, causing trim() to receive the $comment array.
+     */
+    public function testParseAddressListWithAddressObject()
+    {
+        $addr = new Horde_Mail_Rfc822_Address('test@example.com');
+        $result = $this->rfc822->parseAddressList($addr);
+
+        $this->assertEquals(1, count($result));
+        $this->assertEquals('test', $result[0]->mailbox);
+        $this->assertEquals('example.com', $result[0]->host);
+    }
+
+    /**
+     * Empty Horde_Mail_Rfc822_Address (from empty string) must not throw.
+     * This is the Identity::verify() path when from_addr is empty.
+     * The object is still added to the list (as an invalid address).
+     */
+    public function testParseAddressListWithEmptyAddressObject()
+    {
+        $addr = new Horde_Mail_Rfc822_Address('');
+        $result = $this->rfc822->parseAddressList($addr, [
+            'validate' => true,
+        ]);
+
+        $this->assertEquals(1, count($result));
+        $this->assertFalse($result[0]->valid);
+    }
+
+    /**
+     * Passing null must not throw — returns an empty list.
+     * Triggered e.g. by Turba contacts without email.
+     */
+    public function testParseAddressListWithNull()
+    {
+        $result = $this->rfc822->parseAddressList(null);
+
+        $this->assertEquals(0, count($result));
+    }
+
+    /**
+     * Passing an array containing null values must skip them gracefully.
+     */
+    public function testParseAddressListWithNullInArray()
+    {
+        $result = $this->rfc822->parseAddressList([null, 'test@example.com']);
+
+        $this->assertEquals(1, count($result));
+        $this->assertEquals('test', $result[0]->mailbox);
+    }
+
+    /**
+     * Passing an array with a mix of strings and Address objects.
+     */
+    public function testParseAddressListMixedArray()
+    {
+        $addr = new Horde_Mail_Rfc822_Address('first@example.com');
+        $result = $this->rfc822->parseAddressList([$addr, 'second@example.com']);
+
+        $this->assertEquals(2, count($result));
+        $this->assertEquals('first', $result[0]->mailbox);
+        $this->assertEquals('second', $result[1]->mailbox);
+    }
+
+    /**
+     * Passing a Horde_Mail_Rfc822_Address object with validate=true.
+     */
+    public function testParseAddressListWithAddressObjectValidated()
+    {
+        $addr = new Horde_Mail_Rfc822_Address('valid@example.com');
+        $result = $this->rfc822->parseAddressList($addr, [
+            'validate' => true,
+        ]);
+
+        $this->assertEquals(1, count($result));
+        $this->assertEquals('valid', $result[0]->mailbox);
+    }
+
 }
