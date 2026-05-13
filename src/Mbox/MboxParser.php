@@ -30,7 +30,7 @@ final class MboxParser implements Countable, IteratorAggregate
     /** @var resource */
     private mixed $stream;
 
-    /** @var array<int, array{date: ?DateTimeImmutable|false, start: int}> */
+    /** @var array<int, array{date: DateTimeImmutable|false|null, start: int}> */
     private array $parsed = [];
 
     /**
@@ -66,7 +66,7 @@ final class MboxParser implements Countable, IteratorAggregate
             }
 
             if ($lastLine === null) {
-                ltrim($line);
+                $line = ltrim($line);
             }
 
             if (str_starts_with($line, 'From ')) {
