@@ -110,6 +110,25 @@
   notes: |
     Original version string was 3.0.0alpha1
     [mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.
+3.0.0-RC1:
+  api: 3.0.0-RC1
+  state:
+    release: RC
+    api: RC
+  date: 2026-05-13
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: |-
+    fix: ltrim doesn't work inplace, need to capture result
+    test: Properly mark coverage at class level
+    style: PER-1 space between cast and value
+    test: Cover regressions from PR#16
+    fix: Add null check to avoid trim(null)
+    Enhance comments for address handling in Rfc822.php
+    Revert "fix: Replace [$address] with (array)$address in Horde_Mail_Rfc822::parseAddressList()"
+    Merge pull request #16 from horde/fix_parseaddresslist
+    fix: Replace [$address] with (array)$address in Horde_Mail_Rfc822::parseAddressList()
 2.6.6:
   api: 2.6.0
   state:

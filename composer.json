@@ -14,7 +14,7 @@
     "keywords": [
         "smtp"
     ],
-    "time": "2026-04-27",
+    "time": "2026-05-13",
     "repositories": [],
     "require": {
         "php": "^7.4 || ^8",
