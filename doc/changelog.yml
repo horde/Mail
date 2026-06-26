@@ -1,115 +1,14 @@
 ---
-3.0.0-beta2:
-  api: 3.0.0-beta2
-  state:
-    release: beta
-    api: beta
-  date: 2026-04-27
-  license:
-    identifier: BSD-2-Clause
-    uri: https://spdx.org/licenses/BSD-2-Clause.html
-  notes: |-
-    test: Cover recent fixes to lenient mode
-    fix: recover from unencoded ':' in display-name (lenient mode)
-    docs: Port copyright and author comments from the original files
-    Fix one php deprecation and remove deprecations for phpunit11
-    docs: README and UPGRADING guide
-    fix: #13 Possible issue in _rfc822IsAtext() uncovered by @amulet1
-    chore: update metadata
-    fix: Catch potential type issue if line is a "false" (EOF)
-    test: Cover modern implementation
-    feat: Consolidated port of Mail package to PSR-4
-    Improve personal name handling in Address.php
-    test: Cover Rfc2047 class
-    style: php-cs-fixer
-    feat: Port RFC 2047 support methods from the MIME package to break circular dependency
-    fix: backport community fix from bytestream fork
-3.0.0-beta1:
-  api: 3.0.0-beta1
-  state:
-    release: beta
-    api: beta
-  date: 2026-04-02
-  license:
-    identifier: BSD-2-Clause
-    uri: https://spdx.org/licenses/BSD-2-Clause.html
-  notes: |-
-    chore: Add returntypewillchange as we don't want to add signatures to lib/ right now
-    test: Modernize test suite
-3.0.0-alpha6:
-  api: 3.0.0-alpha6
-  state:
-    release: alpha
-    api: alpha
-  date: 2026-03-15
-  license:
-    identifier: BSD-2-Clause
-    uri: https://spdx.org/licenses/BSD-2-Clause.html
-  notes: |-
-    Merge pull request #8 from horde/feat/migrate-netdns2
-    feat: Drop PEAR dependencies
-3.0.0-alpha5:
-  api: 3.0.0-alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2025-06-01
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    style: Formal php-cs-fixer run
-    style: use builtin base class signatures for seekableiterator and countable
-    fix: Horde_Mail_Rfc822_List does not consider Horde_Mime_Headers_Addresses
-3.0.0-alpha4:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2022-10-08
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 3.0.0alpha4
-    [rla] Fix validation for identities without an email address
-    |+
-3.0.0-alpha3:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2021-03-13
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |-
-    Original version string was 3.0.0alpha3
-    |+
-3.0.0-alpha2:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2021-02-24
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |-
-    Original version string was 3.0.0alpha2
-    |+
-3.0.0-alpha1:
-  api: 3.0.0alpha1
+3.0.0:
+  api: 3.0.0
   state:
     release: stable
     api: stable
-  date: 2021-02-24
+  date: 2026-06-26
   license:
     identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 3.0.0alpha1
-    [mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: 'chore: Update workflow dependency'
 3.0.0-RC2:
   api: 3.0.0-RC2
   state:
@@ -119,9 +18,7 @@
   license:
     identifier: BSD-2-Clause
     uri: https://spdx.org/licenses/BSD-2-Clause.html
-  notes: |-
-    test: Implement canonical RFC 822 compliance test according to examples from the RFC text
-    chore: Metadata
+  notes: "test: Implement canonical RFC 822 compliance test according to examples from the RFC text\nchore: Metadata"
 3.0.0-RC1:
   api: 3.0.0-RC1
   state:
@@ -131,16 +28,87 @@
   license:
     identifier: BSD-2-Clause
     uri: https://spdx.org/licenses/BSD-2-Clause.html
-  notes: |-
-    fix: ltrim doesn't work inplace, need to capture result
-    test: Properly mark coverage at class level
-    style: PER-1 space between cast and value
-    test: Cover regressions from PR#16
-    fix: Add null check to avoid trim(null)
-    Enhance comments for address handling in Rfc822.php
-    Revert "fix: Replace [$address] with (array)$address in Horde_Mail_Rfc822::parseAddressList()"
-    Merge pull request #16 from horde/fix_parseaddresslist
-    fix: Replace [$address] with (array)$address in Horde_Mail_Rfc822::parseAddressList()
+  notes: "fix: ltrim doesn't work inplace, need to capture result\ntest: Properly mark coverage at class level\nstyle: PER-1 space between cast and value\ntest: Cover regressions from PR#16\nfix: Add null check to avoid trim(null)\nEnhance comments for address handling in Rfc822.php\nRevert \"fix: Replace [$address] with (array)$address in Horde_Mail_Rfc822::parseAddressList()\"\nMerge pull request #16 from horde/fix_parseaddresslist\nfix: Replace [$address] with (array)$address in Horde_Mail_Rfc822::parseAddressList()"
+3.0.0-beta2:
+  api: 3.0.0-beta2
+  state:
+    release: beta
+    api: beta
+  date: 2026-04-27
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: "test: Cover recent fixes to lenient mode\nfix: recover from unencoded ':' in display-name (lenient mode)\ndocs: Port copyright and author comments from the original files\nFix one php deprecation and remove deprecations for phpunit11\ndocs: README and UPGRADING guide\nfix: #13 Possible issue in _rfc822IsAtext() uncovered by @amulet1\nchore: update metadata\nfix: Catch potential type issue if line is a \"false\" (EOF)\ntest: Cover modern implementation\nfeat: Consolidated port of Mail package to PSR-4\nImprove personal name handling in Address.php\ntest: Cover Rfc2047 class\nstyle: php-cs-fixer\nfeat: Port RFC 2047 support methods from the MIME package to break circular dependency\nfix: backport community fix from bytestream fork"
+3.0.0-beta1:
+  api: 3.0.0-beta1
+  state:
+    release: beta
+    api: beta
+  date: 2026-04-02
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: "chore: Add returntypewillchange as we don't want to add signatures to lib/ right now\ntest: Modernize test suite"
+3.0.0-alpha6:
+  api: 3.0.0-alpha6
+  state:
+    release: alpha
+    api: alpha
+  date: 2026-03-15
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: "Merge pull request #8 from horde/feat/migrate-netdns2\nfeat: Drop PEAR dependencies"
+3.0.0-alpha5:
+  api: 3.0.0-alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2025-06-01
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "style: Formal php-cs-fixer run\nstyle: use builtin base class signatures for seekableiterator and countable\nfix: Horde_Mail_Rfc822_List does not consider Horde_Mime_Headers_Addresses\n"
+3.0.0-alpha4:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2022-10-08
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 3.0.0alpha4\n[rla] Fix validation for identities without an email address\n|+\n"
+3.0.0-alpha3:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2021-03-13
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 3.0.0alpha3\n|+"
+3.0.0-alpha2:
+  api: 3.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2021-02-24
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 3.0.0alpha2\n|+"
+3.0.0-alpha1:
+  api: 3.0.0alpha1
+  state:
+    release: stable
+    api: stable
+  date: 2021-02-24
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 3.0.0alpha1\n[mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.\n"
 2.6.6:
   api: 2.6.0
   state:
@@ -150,8 +118,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mjr] Null string fixes for PHP 8.1 (PR #2, Christoph Wurst <christoph@winzerhof-wurst.at>)
+  notes: "[mjr] Null string fixes for PHP 8.1 (PR #2, Christoph Wurst <christoph@winzerhof-wurst.at>)\n"
 2.6.5:
   api: 2.6.0
   state:
@@ -161,9 +128,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-    [mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.
-    
+  notes: "[mjr] Avoid warnings on PHP 7.3 regarding continue statements within switch blocks.\n\n"
 2.6.4:
   api: 2.6.0
   state:
@@ -173,8 +138,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [jan] Add Turkish translation (İTÜ BİDB <sistemdestek@itu.edu.tr>).
+  notes: "[jan] Add Turkish translation (İTÜ BİDB <sistemdestek@itu.edu.tr>).\n"
 2.6.3:
   api: 2.6.0
   state:
@@ -184,8 +148,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [jan] Mark PHP 7 as supported.
+  notes: "[jan] Mark PHP 7 as supported.\n"
 2.6.2:
   api: 2.6.0
   state:
@@ -195,8 +158,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Fix validating sent messages if the driver supports EAI addresses.
+  notes: "[mms] Fix validating sent messages if the driver supports EAI addresses.\n"
 2.6.1:
   api: 2.6.0
   state:
@@ -206,8 +168,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mjr] Fix sending mail via PHP's mail function (Steffen Lindner <mail@steffen-lindner.de>).
+  notes: "[mjr] Fix sending mail via PHP's mail function (Steffen Lindner <mail@steffen-lindner.de>).\n"
 2.6.0:
   api: 2.6.0
   state:
@@ -217,9 +178,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [jan] Fix issues with certain locales like Turkish.
-    [mms] Add support for outputting comment information when writing an address.
+  notes: "[jan] Fix issues with certain locales like Turkish.\n[mms] Add support for outputting comment information when writing an address.\n"
 2.5.1:
   api: 2.5.0
   state:
@@ -229,8 +188,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] IDN support no longer requires intl to be built-in to PHP.
+  notes: "[mms] IDN support no longer requires intl to be built-in to PHP.\n"
 2.5.0:
   api: 2.5.0
   state:
@@ -240,12 +198,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Added Horde_Mail_Rfc822_List#first() function.
-    [mms] Add property to address object to indicate whether it is an EAI address.
-    [mms] Transport driver now indicates whether it handles EAI data.
-    [mms] Support validation of EAI addresses (RFC 6532).
-    [mms] Add Horde_Mail_Mbox_Parse.
+  notes: "[mms] Added Horde_Mail_Rfc822_List#first() function.\n[mms] Add property to address object to indicate whether it is an EAI address.\n[mms] Transport driver now indicates whether it handles EAI data.\n[mms] Support validation of EAI addresses (RFC 6532).\n[mms] Add Horde_Mail_Mbox_Parse.\n"
 2.4.0:
   api: 2.4.0
   state:
@@ -255,8 +208,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Added the 'noquote' option to Horde_Mail_Rfc822_Object#writeAddress().
+  notes: "[mms] Added the 'noquote' option to Horde_Mail_Rfc822_Object#writeAddress().\n"
 2.3.0:
   api: 2.3.0
   state:
@@ -266,8 +218,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Add Horde_Mail_Transport_Lmtphorde driver.
+  notes: "[mms] Add Horde_Mail_Transport_Lmtphorde driver.\n"
 2.2.0:
   api: 2.2.0
   state:
@@ -277,9 +228,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Be more lenient in parsing RFC 5322 identification field values.
-    [mms] Add Horde_Mail_Rfc822_Identification class.
+  notes: "[mms] Be more lenient in parsing RFC 5322 identification field values.\n[mms] Add Horde_Mail_Rfc822_Identification class.\n"
 2.1.6:
   api: 2.1.0
   state:
@@ -289,8 +238,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Optimizations to address parsing.
+  notes: "[mms] Optimizations to address parsing.\n"
 2.1.5:
   api: 2.1.0
   state:
@@ -300,7 +248,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: ~
+  notes: null
 2.1.4:
   api: 2.1.0
   state:
@@ -310,8 +258,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] More thorough job trying to parse addresses that contain an @ but no domain information.
+  notes: "[mms] More thorough job trying to parse addresses that contain an @ but no domain information.\n"
 2.1.3:
   api: 2.1.0
   state:
@@ -321,8 +268,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Correctly identify e-mail addresses without domain information when validating.
+  notes: "[mms] Correctly identify e-mail addresses without domain information when validating.\n"
 2.1.2:
   api: 2.1.0
   state:
@@ -332,8 +278,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Discard personal information when it is identical to e-mail address.
+  notes: "[mms] Discard personal information when it is identical to e-mail address.\n"
 2.1.1:
   api: 2.1.0
   state:
@@ -343,8 +288,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Workaround broken Net_SMTP handling regarding the end of message data (Bug #12614).
+  notes: "[mms] Workaround broken Net_SMTP handling regarding the end of message data (Bug #12614).\n"
 2.1.0:
   api: 2.1.0
   state:
@@ -354,10 +298,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Added the Horde_Mail_Transport_Smtphorde driver.
-    [mms] Added the 'bare_addresses_idn' property to Horde_Mail_Rfc822_List.
-    [mms] Added the 'bare_address_idn' property to Horde_Mail_Rfc822_Address.
+  notes: "[mms] Added the Horde_Mail_Transport_Smtphorde driver.\n[mms] Added the 'bare_addresses_idn' property to Horde_Mail_Rfc822_List.\n[mms] Added the 'bare_address_idn' property to Horde_Mail_Rfc822_Address.\n"
 2.0.6:
   api: 2.0.0
   state:
@@ -367,8 +308,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Honor 'pipelining' configuration option in SMTP transport driver.
+  notes: "[mms] Honor 'pipelining' configuration option in SMTP transport driver.\n"
 2.0.5:
   api: 2.0.0
   state:
@@ -378,8 +318,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Correctly encode IDN domains when sending mail (Bug #12116).
+  notes: "[mms] Correctly encode IDN domains when sending mail (Bug #12116).\n"
 2.0.4:
   api: 2.0.0
   state:
@@ -389,8 +328,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Improve unit tests.
+  notes: "[mms] Improve unit tests.\n"
 2.0.3:
   api: 2.0.0
   state:
@@ -400,8 +338,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Fix behavior of 'persist' option in SMTP transport driver.
+  notes: "[mms] Fix behavior of 'persist' option in SMTP transport driver.\n"
 2.0.2:
   api: 2.0.0
   state:
@@ -411,8 +348,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Fix default_domain parameter to Horde_Mail_Rfc822 (Bug #11804).
+  notes: "[mms] Fix default_domain parameter to Horde_Mail_Rfc822 (Bug #11804).\n"
 2.0.1:
   api: 2.0.0
   state:
@@ -422,47 +358,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Ensure bare address is output to SMTP MAIL command.
-2.0.0-beta2:
-  api: 2.0.0beta1
-  state:
-    release: beta
-    api: beta
-  date: 2012-08-29
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 2.0.0beta2
-    [mms] Add Horde_Mail_Rfc822_Address#matchDomain().
-    [mms] Add Horde_Mail_Rfc822_Address#matchInsensitive().
-    [mms] Fix parsing Return-Path header when using sendmail driver (Bug #11361).
-2.0.0-beta1:
-  api: 2.0.0beta1
-  state:
-    release: beta
-    api: beta
-  date: 2012-07-19
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 2.0.0beta1
-    First beta release for Horde 5.
-2.0.0-alpha1:
-  api: 2.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2012-07-05
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 2.0.0alpha1
-    First alpha release for Horde 5.
-    [mms] Implement new 2.0 API. See UPGRADING for full details of changes.
+  notes: "[mms] Ensure bare address is output to SMTP MAIL command.\n"
 2.0.0:
   api: 2.0.0
   state:
@@ -472,8 +368,37 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First stable release for Horde 5.
+  notes: "First stable release for Horde 5.\n"
+2.0.0-beta2:
+  api: 2.0.0beta1
+  state:
+    release: beta
+    api: beta
+  date: 2012-08-29
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 2.0.0beta2\n[mms] Add Horde_Mail_Rfc822_Address#matchDomain().\n[mms] Add Horde_Mail_Rfc822_Address#matchInsensitive().\n[mms] Fix parsing Return-Path header when using sendmail driver (Bug #11361).\n"
+2.0.0-beta1:
+  api: 2.0.0beta1
+  state:
+    release: beta
+    api: beta
+  date: 2012-07-19
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 2.0.0beta1\nFirst beta release for Horde 5.\n"
+2.0.0-alpha1:
+  api: 2.0.0alpha1
+  state:
+    release: alpha
+    api: alpha
+  date: 2012-07-05
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 2.0.0alpha1\nFirst alpha release for Horde 5.\n[mms] Implement new 2.0 API. See UPGRADING for full details of changes.\n"
 1.2.1:
   api: 1.2.0
   state:
@@ -483,7 +408,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: ~
+  notes: null
 1.2.0:
   api: 1.2.0
   state:
@@ -493,17 +418,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Added Horde_Mail_Rfc822_Address#encoded property.
-    [mms] Better support for IDN hosts in non-validate address parsing mode (Bug #11021).
-    [mms] Added Horde_Mail_Rfc822#trimAddress().
-    [mms] Add optional arguments to the Horde_Mail_Rfc822_Group constructor.
-    [mms] Horde_Mail_Rfc822#parseAddressList() now accepts Horde_Mail_Rfc822_Objects within the first argument.
-    [mms] The address and group objects now extend the base Horde_Mail_Rfc822_Object class.
-    [mms] Add optional arguments to the Horde_Mail_Rfc822_Group constructor.
-    [mms] First argument to Horde_Mail_Rfc822#parseAddressList() can now be an array of addresses.
-    [mms] Add Horde_Mail_Rfc822#encode().
-    [mms] Workaround unexpected return from PHP_EOL in Mail transport drivers.
+  notes: "[mms] Added Horde_Mail_Rfc822_Address#encoded property.\n[mms] Better support for IDN hosts in non-validate address parsing mode (Bug #11021).\n[mms] Added Horde_Mail_Rfc822#trimAddress().\n[mms] Add optional arguments to the Horde_Mail_Rfc822_Group constructor.\n[mms] Horde_Mail_Rfc822#parseAddressList() now accepts Horde_Mail_Rfc822_Objects within the first argument.\n[mms] The address and group objects now extend the base Horde_Mail_Rfc822_Object class.\n[mms] Add optional arguments to the Horde_Mail_Rfc822_Group constructor.\n[mms] First argument to Horde_Mail_Rfc822#parseAddressList() can now be an array of addresses.\n[mms] Add Horde_Mail_Rfc822#encode().\n[mms] Workaround unexpected return from PHP_EOL in Mail transport drivers.\n"
 1.1.0:
   api: 1.1.0
   state:
@@ -513,9 +428,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Created Horde_Mail_Rfc822_Address and Horde_Mail_Rfc822_Group objects to represent e-mail addresses.
-    [mms] Improved parser for e-mail addresses (Request #10949).
+  notes: "[mms] Created Horde_Mail_Rfc822_Address and Horde_Mail_Rfc822_Group objects to represent e-mail addresses.\n[mms] Improved parser for e-mail addresses (Request #10949).\n"
 1.0.3:
   api: 1.0.0
   state:
@@ -525,8 +438,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Fix line-endings for transport drivers that send messages using local tools/programs.
+  notes: "[mms] Fix line-endings for transport drivers that send messages using local tools/programs.\n"
 1.0.2:
   api: 1.0.0
   state:
@@ -536,8 +448,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Always use canonical line endings in sendmail driver (Bug #10696).
+  notes: "[mms] Always use canonical line endings in sendmail driver (Bug #10696).\n"
 1.0.1:
   api: 1.0.0
   state:
@@ -547,58 +458,7 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    [mms] Fix parseAddressList() for empty address strings (Bug #10534).
-    [mms] Fix SMTP error codes/messages (Bug #10498).
-1.0.0-beta1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-16
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 1.0.0beta1
-    First beta release for Horde 4.
-1.0.0-alpha1:
-  api: 1.0.0
-  state:
-    release: alpha
-    api: alpha
-  date: 2011-03-08
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 1.0.0alpha1
-    First alpha release for Horde 4.
-1.0.0-RC2:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-29
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 1.0.0RC2
-    Second release candidate for Horde 4.
-1.0.0-RC1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-22
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Original version string was 1.0.0RC1
-    First release candidate for Horde 4.
-    [jan] Fix passing arguments to sendmail binary (Gonçalo Queirós, Bug #9693).
+  notes: "[mms] Fix parseAddressList() for empty address strings (Bug #10534).\n[mms] Fix SMTP error codes/messages (Bug #10498).\n"
 1.0.0:
   api: 1.0.0
   state:
@@ -608,5 +468,44 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First stable release for Horde 4.
+  notes: "First stable release for Horde 4.\n"
+1.0.0-RC2:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-29
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 1.0.0RC2\nSecond release candidate for Horde 4.\n"
+1.0.0-RC1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-22
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 1.0.0RC1\nFirst release candidate for Horde 4.\n[jan] Fix passing arguments to sendmail binary (Gonçalo Queirós, Bug #9693).\n"
+1.0.0-beta1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-16
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 1.0.0beta1\nFirst beta release for Horde 4.\n"
+1.0.0-alpha1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-03-08
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: "Original version string was 1.0.0alpha1\nFirst alpha release for Horde 4.\n"
